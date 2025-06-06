@@ -1,0 +1,1241 @@
+;---------------------------------------------------------------------------
+; 各種項目設定
+;---------------------------------------------------------------------------
+; Initialize (at the start of the round)
+[Statedef 5900]
+type = S
+
+[State 5900, 1] ;Clear all int variables
+type = VarRangeSet
+trigger1 = RoundsExisted = 0
+value = 0
+first = 2
+last = 15
+
+[State 5900, 2] ;Clear all float variables
+type = VarRangeSet
+trigger1 = RoundsExisted = 0
+fvalue = 0
+
+;===========================================================================
+; 本体関連設定 ここから
+;===========================================================================
+;※設定方法の説明
+;value = ○ * (★)　← この記述がある場所の【★】を任意の数字に変更してください。
+
+;限界ダメージ有無設定
+[State 5900, Config_1]
+type = VarAdd
+trigger1 = !(Var(50) & 1)
+v = 50
+value = 1 * (1)		;← 限界ダメージの有無を設定できます。（ただし、ダッグ戦は機能しません。）
+ignorehitpause = 1	;「コンボの合計ダメージが約7割を超えるとそれ以降はダメージが入らなくなる」
+			;という原作の仕様で、これのおかげで即死が出来ないようになっています。
+			;小次郎は永久もないので、有りでも無しでもあんまり変わらないのかな？
+			;０ ･･･ 限界ダメージなし
+			;１ ･･･ 限界ダメージあり（原作通り）		※デフォルト
+
+
+;自動復帰ステート中の無敵設定
+[State 5900, Config_2]
+type = VarAdd
+trigger1 = !(Var(50) & 2)
+trigger1 = !(Var(50) & 4)
+v = 50
+value = 2 * (1)		;← 自動復帰ステート(State 5040)中を無敵にするかどうかを設定できます。
+ignorehitpause = 1	;原作の「デフォルトで追撃不可、追撃可能技が当たった場合は専用判定が出現し追撃可能」
+			;の仕様をMUGENで再現するための設定です。
+			;設定を出したり消したりは出来ないので、無敵で再現してあります。
+			;０ ･･･ 無敵なし
+			;１ ･･･ HitOver後に無敵あり			※デフォルト
+			;２ ･･･ ステート中は完全無敵
+
+
+;前方ジャンプガード設定
+[State 5900, Config_3]
+type = VarAdd
+trigger1 = !(Var(50) & 8)
+v = 50
+value = 8 * (1)		;← 前方ジャンプ時にガードが出来るかどうかを設定できます。
+ignorehitpause = 1	;文字通りですが、原作では前方ジャンプ時ではガードが出来ない仕様になっています。
+			;MUGENではデメリットになるだけなので、可能・不可能を設定できるようにー。
+			;０ ･･･ 前方ジャンプ時ガード不可（原作通り）
+			;１ ･･･ 前方ジャンプ時ガード可能		※デフォルト
+
+
+;極剣質防御力設定
+[State 5900, Config_4]
+type = VarAdd
+trigger1 = !(Var(50) & 16)
+v = 50
+value = 16 * (1)	;← 「極」剣質時での防御力を設定できます。
+ignorehitpause = 1	;原作では「極」剣質になると防御力が低下します。
+			;･････が、あまりにも脆くなりすぎなので緩和できる設定を設けてみました。
+			;０ ･･･ 防御力低下あり（原作通り）
+			;１ ･･･ 防御力低下なし				※デフォルト
+
+
+;極剣質ゲージ回収率設定
+[State 5900, Config_5]
+type = VarAdd
+trigger1 = !(Var(50) & 32)
+v = 50
+value = 32 * (1)	;← 「極」剣質時でのゲージ回収率を設定できます。
+ignorehitpause = 1	;こちらも原作の「極」剣質だと、極端にゲージが回収できなくなるので･･･。
+			;設定をＯＮにすると、攻撃をガードされた時の回収率が少しだけ緩和されます。
+			;０ ･･･ ゲージ回収率増加なし（原作通り）
+			;１ ･･･ ゲージ回収率増加あり			※デフォルト
+
+
+;ガード硬直短縮設定
+[State 5900, Config_6]
+type = VarAdd
+trigger1 = !(Var(50) & 64)
+v = 50
+value = 64 * (0)	;← 原作での最重要テクニック、ガード硬直短縮が出来るかどうかを設定できます。
+ignorehitpause = 1	;ガードの硬直中に「しゃがみガード → 立ちガード」または「立ちガード → しゃがみガード」
+			;と切り替えると、ガード時の硬直時間が短縮されます。
+			;０ ･･･ ガード硬直短縮不可			※デフォルト
+			;１ ･･･ ガード硬直短縮可能（原作通り）
+
+
+;勝利デモ有無設定
+[State 5900, Config_7]
+Type = VarAdd
+trigger1 = !(Var(50) & 128)
+v = 50
+value = 128 * (0)	;← シングル戦またはチーム戦で勝利したあとの勝利台詞の有無を設定できます。
+			;苦労した割に、レパートリー少なくってどうしようもない！
+			;条件が厳しくて大体台詞が「新撰組（以下略）」になっちゃうのです･･･
+			;０ ･･･ 勝利デモなし				※デフォルト
+			;１ ･･･ 勝利デモあり
+
+
+;無明剣・贄 演出設定
+[State 5900, Config_8]
+Type = VarAdd
+trigger1 = !(TeamMode = Simul || Enemy,TeamMode = Simul)
+trigger1 = !(Var(50) & 256)
+v = 50
+value = 256 * (1)	;← 無明剣・贄がヒットした時の演出方法を設定できます。
+			;原作でのヒット後はステージの中央に強制移動となるのですが、MUGENではそういう設定が無いのです。
+			;･････が、ある程度中央に戻るよう工夫してみました。演出が雑になりますけども（
+			;０ ･･･ 中央移動なし（演出が綺麗になります）
+			;１ ･･･ 中央移動あり（演出が犠牲になります）	※デフォルト
+
+
+;天地 攻撃属性設定
+[State 5900, Config_9]
+Type = VarAdd
+trigger1 = !(Var(50) & 512)
+v = 50
+value = 512 * (0)	;← 裏回りした時の天地の攻撃属性を変更するかどうかを設定できます。
+			;原作ではガード後や仰け反り後に投げ無敵があるのですが、振り向きが入ると無敵が解除されます。
+			;その仕様を活かして天地で崩しを行えるわけですが、MUGENにはいろいろなキャラがいるわけで･･･
+			;裏回りした時を打撃属性にすることにより、疑似投げ無敵解除として投げることができるようになります。
+			;０ ･･･ 属性変更なし（原作通り）		※デフォルト
+			;１ ･･･ 打撃属性に変更（当身されにくいHitdef技術を使用）
+
+
+;===========================================================================
+; 本体関連設定 ここまで
+;===========================================================================
+
+[State 5900, 3]
+type = Helper
+trigger1 = Time = 0
+helpertype = normal
+name = "wipe_effect_open"
+stateno = 10180
+id = 10180
+pos = 0,0
+postype = left
+keyctrl = 0
+ownpal = 0
+persistent = 0
+ignorehitpause = 1
+pausemovetime = 999999999
+supermovetime = 999999999
+
+[State 5900, 4] ;Intro for round 1
+type = ChangeState
+trigger1 = RoundsExisted = 0
+value = 190
+
+;---------------------------------------------------------------------------
+[Statedef 25000]
+ctrl = 0
+anim = 10000
+
+[State 25000, 0]
+type = SelfState
+trigger1 = !IsHelper
+value = 0
+
+[State 25000, 1]
+type = AssertSpecial
+trigger1 = IsHelper
+flag = Invisible
+
+[State 25000, 2]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+ignorehitpause = 1
+
+;===========================================================================
+; A.I.関連設定 ここから
+;===========================================================================
+;※設定方法の説明
+;value = ★　← この記述がある場所の【★】を任意の数字に変更してください。
+
+;A.I.常時起動設定（設定不可）
+[State -3, AI]
+type = Null;VarSet
+trigger1 = Var(59) = 0
+v = 59
+value = 0		;← 常時A.I.を起動するかどうかの設定ができます。
+ignorehitpause = 1	;０がＯＦＦ、１がＯＮになります。
+			;※ＯＮにするとA.I.の起動が早くなりますが、プレイヤー操作は出来なくなります。
+
+
+;A.I.レベル設定（設定不可）
+[State -3, AI]
+type = Null;VarSet
+trigger1 = Var(59) > 0
+trigger2 = Root,Var(59) > 0
+v = 59
+value = 10		;← A.I.の強さを変更することが出来ます。０～１０の間で設定してください。
+ignorehitpause = 1
+
+
+;A.I.弾き使用率設定（設定不可）
+[State -3, AI]
+type = Null;VarSet
+trigger1 = Var(58) = 0
+v = 58
+value = 20		;← 相手の攻撃に対して、弾きを使用するかどうかの確立を設定できます。
+ignorehitpause = 1	;０～１００の間で設定してください。
+			;※使用率を｢100｣に設定しても、全て弾いてくれるというわけではないです。
+			;攻撃の種類や相手との距離によっては、弾きを使用しません。
+
+
+;剣質設定
+[State -3, AI]
+type = VarSet
+trigger1 = Var(57) = 0
+trigger1 = RoundsExisted = 0
+v = 57
+value = 0		;← １～３の数字を選択すると、剣質が即座に決定できます。A.I.じゃなくても有効になってます。
+ignorehitpause = 1	;０ ･･･ 即決定を使用しません。あらかじめカラーごとに決められている剣質になります。
+			;１ ･･･ 剣質「力」で固定になります。
+			;２ ･･･ 剣質「技」で固定になります。
+			;３ ･･･ 剣質「極」で固定になります。
+
+
+;===========================================================================
+; A.I.関連設定 ここまで
+;===========================================================================
+
+
+;ここから先、弄っちゃダメ！
+
+
+;----------------------------------------------------------------------------
+;----------------------------------------------------------------------------
+;============================================================================
+;============================================================================
+;──────────────────────────────────────
+;──────────────────────────────────────
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+;真田小次郎 学習ヘルパー
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;──────────────────────────────────────
+;──────────────────────────────────────
+;============================================================================
+;============================================================================
+;----------------------------------------------------------------------------
+;----------------------------------------------------------------------------
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; 真田小次郎 使用変数一覧
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;var(0)		：ガードヘルパー用
+;var(1)-(5)	：飛び道具への対策
+;var(6)-(9)	：対人用対空ガード再現
+;var(10)	：相手StateNo記憶(常時記憶)
+;var(11)	：相手StateType反応
+;var(12)	：攻撃間合い簡易記憶
+;var(13)	：攻撃総合時間記憶
+;var(14)	：相手StateNo常時監視
+;var(15)	：相手StateNo一時記憶
+;var(16)	：弾き連発制限
+;var(17)	：空対地Ｘ距離記憶
+;var(18)	：空対地Ｙ距離記憶
+;var(19)-(20)	：攻撃判定出現からの総合時間
+;var(21)	：起き上がり投げ無敵判別
+;var(27)	：
+;var(28)	：
+;var(29)	：やられ状態判別補助
+;var(30)	：ガード方向
+;var(31)-(32)	：投げ技学習
+;var(33)-(34)	：中段攻撃学習
+;var(35)-(36)	：下段攻撃学習
+;var(37)-(38)	：空中ガード不可攻撃・空対空攻撃学習
+;var(39)	：地上ガード不可攻撃学習
+;var(40)	：中段攻撃時間学習
+;var(41)	：下段攻撃時間学習
+;var(42)	：空中ガード不可攻撃・空対空攻撃時間学習
+;var(43)-(47)	：起き攻め学習
+;var(48)	：起き上がり行動制限
+;var(49)	：相手AnimTime記憶
+;var(50)	：
+;var(51)	：
+;var(52)	：
+;var(53)	：
+;var(54)	：
+;var(55)	：
+;var(56)	：
+;var(57)	：剣質設定
+;var(58)	：弾きレベル
+;var(59)	：A.I.レベル
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;念のため再反映
+
+[State 25000, 学習再反映]
+type = Null
+trigger1  = Root,Var(31) != 0
+trigger1  = Var(31) = 0
+trigger1  = Var(31) := Root,Var(31)
+trigger2  = Root,Var(32) != 0
+trigger2  = Var(32) = 0
+trigger2  = Var(32) := Root,Var(32)
+trigger3  = Root,Var(33) != 0
+trigger3  = Var(33) = 0
+trigger3  = Var(33) := Root,Var(33)
+trigger4  = Root,Var(34) != 0
+trigger4  = Var(34) = 0
+trigger4  = Var(34) := Root,Var(34)
+trigger5  = Root,Var(35) != 0
+trigger5  = Var(35) = 0
+trigger5  = Var(35) := Root,Var(35)
+trigger6  = Root,Var(36) != 0
+trigger6  = Var(36) = 0
+trigger6  = Var(36) := Root,Var(36)
+trigger7  = Root,Var(37) != 0
+trigger7  = Var(37) = 0
+trigger7  = Var(37) := Root,Var(37)
+trigger8  = Root,Var(38) != 0
+trigger8  = Var(38) = 0
+trigger8  = Var(38) := Root,Var(38)
+trigger9  = Root,Var(39) != 0
+trigger9  = Var(39) = 0
+trigger9  = Var(39) := Root,Var(39)
+trigger10 = Root,Var(40) != 0
+trigger10 = Var(40) = 0
+trigger10 = Var(40) := Root,Var(40)
+trigger11 = Root,Var(41) != 0
+trigger11 = Var(41) = 0
+trigger11 = Var(41) := Root,Var(41)
+trigger12 = Root,Var(42) != 0
+trigger12 = Var(42) = 0
+trigger12 = Var(42) := Root,Var(42)
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;ガードめくり対策
+
+[State 25000, InGuardDist]
+type = Turn
+trigger1 = Facing * IfElse((Enemy(Root,Var(55)),Pos X - Pos X) >= 0, 1,-1) < 0
+ignorehitpause = 1
+
+[State 25000, InGuardDist]
+type = VarSet
+trigger1 = Enemy(Root,Var(55)),Facing * IfElse((Enemy(Root,Var(55)),Pos X - Root,Pos X) >= 0, 1,-1) <= 0
+trigger2 = !Enemy(Root,Var(55)),HitDefAttr = A, NA, SA, HA
+var(0) = 0
+ignorehitpause = 1
+
+[State 25000, InGuardDist]
+type = VarSet
+trigger1 = Enemy(Root,Var(55)),Facing * IfElse((Enemy(Root,Var(55)),Pos X - Root,Pos X) >= 0, 1,-1) > 0
+trigger1 = Enemy(Root,Var(55)),HitDefAttr = A, NA, SA, HA
+var(0) = 1
+ignorehitpause = 1
+
+[State 25000, InGuardDist]
+type = PosSet
+trigger1 = IsHelper
+x = Root,Pos X + IfElse((Enemy(Root,Var(55)),Pos Y < 0 && Var(0) = 1),(Enemy(Root,Var(55)),Const(size.attack.dist)),(Enemy(Root,Var(55)),Const(size.proj.attack.dist))) * (Enemy(Root,Var(55)),Facing)
+y = Root,Pos Y
+ignorehitpause = 1
+
+[State 25000, InGuardDist]
+type = PosSet
+trigger1 = IsHelper
+trigger1 = BackEdgeBodyDist <= 0
+x = IfElse(Facing = 1, -160, 160)
+y = Root,Pos Y
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;飛び道具への対策
+
+;飛び道具判定
+[State 25000, Helper_1]
+type = VarSet
+triggerall = Var(1) = 0
+triggerall = EnemyNear,NumHelper > 0
+triggerall = RoundState = 2 && Root,Ctrl = 1
+trigger1 = Enemy,TeamMode = Single
+trigger2 = Enemy,TeamMode = Turns
+v = 1
+value = EnemyNear,NumHelper
+
+[State 25000, Helper_2]
+type = VarSet
+triggerall = Var(1) = 0
+trigger1 = Enemy,TeamMode = Simul
+trigger1 = Enemy,NumHelper > 0
+trigger1 = RoundState = 2 && Root,Ctrl = 1
+v = 1
+value = Enemy,NumHelper
+
+[State 25000, Proj_1]
+type = VarSet
+triggerall = Var(2) = 0
+triggerall = EnemyNear,NumProj > 0
+triggerall = EnemyNear,PrevStateNo = [190,199]
+trigger1 = Enemy,TeamMode = Single
+trigger2 = Enemy,TeamMode = Turns
+v = 2
+value = EnemyNear,NumProj
+
+[State 25000, Proj_2]
+type = VarSet
+triggerall = Var(2) = 0
+trigger1 = Enemy,TeamMode = Simul
+trigger1 = Enemy,NumProj > 0
+trigger1 = EnemyNear,PrevStateNo = [190,199]
+v = 2
+value = Enemy,NumProj
+
+[State 25000, 誤検出対策_Helper]
+type = Null
+trigger1 = Enemy,NumHelper = Var(1)
+trigger1 = Var(4) := 0 || 1
+trigger2 = Var(4) >= 180
+trigger2 = Var(1) := Var(1) - 1
+trigger3 = Enemy,NumHelper < Var(1)
+trigger3 = Var(4) := Var(4) + 1
+
+[State 25000, 誤検出対策_Proj]
+type = Null
+trigger1 = Enemy,NumProj = Var(2)
+trigger1 = Var(5) := 0 || 1
+trigger2 = Var(5) >= 120
+trigger2 = Var(2) := Var(2) - 1
+trigger3 = Enemy,NumProj < Var(2)
+trigger3 = Var(5) := Var(5) + 1
+
+[State 25000, 測定以降出現対策]
+type = Null
+trigger1 = Enemy,NumHelper > Var(1)
+trigger1 = !Root,InGuardDist && InGuardDist
+trigger1 = Var(3) := 3
+trigger2 = Enemy,NumProj > Var(2)
+trigger2 = !Root,InGuardDist && InGuardDist
+trigger2 = Var(3) := 3
+trigger3 = Enemy,NumHelper > Var(1)
+trigger3 = Root,InGuardDist
+trigger3 = Var(3) := 2
+trigger4 = Enemy,NumProj > Var(2)
+trigger4 = Root,InGuardDist
+trigger4 = Var(3) := 2
+trigger5 = Enemy,NumHelper > Var(1)
+trigger5 = !Root,InGuardDist
+trigger5 = Var(3) := 1
+trigger6 = Enemy,NumProj > Var(2)
+trigger6 = !Root,InGuardDist
+trigger6 = Var(3) := 1
+trigger7 = Enemy,NumHelper = Var(1)
+trigger7 = Root,Ctrl || (Root,StateNo != [120,155])
+trigger7 = Var(3) := 0 || 1
+trigger8 = Enemy,NumProj = Var(2)
+trigger8 = Root,Ctrl || (Root,StateNo != [120,155])
+trigger8 = Var(3) := 0 || 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;対人用対空ガード再現
+
+[State 25000, Guard_1]
+type = VarSet
+triggerall = Var(6) != 0
+trigger1 = EnemyNear(Root,Var(55)),StateType != A || EnemyNear(Root,Var(55)),MoveType != A
+trigger2 = Root,MoveType = H
+trigger2 = Root,StateNo != [120,159]
+var(6) = 0
+ignorehitpause = 1
+
+[State 25000, Guard_2]
+type = Null
+trigger1 = EnemyNear(Root,Var(55)),StateType = A
+trigger1 = Var(7) := Var(7) + 1
+trigger2 = EnemyNear(Root,Var(55)),StateType != A
+trigger2 = Var(7) := 0 || 1
+
+[State 25000, Guard_3]
+type = VarSet
+trigger1 = Var(6) = 0
+trigger1 = EnemyNear(Root,Var(55)),StateType = A
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = Random < 1000 - Floor(1000 - Abs(EnemyNear(Root,Var(55)),Pos Y * 6))
+trigger2 = Var(6) != 1
+trigger2 = EnemyNear(Root,Var(55)),Vel Y * (EnemyNear(Root,Var(55)),StateTime * 0.1) > 3.0
+trigger3 = Var(7) != 0
+trigger3 = Var(7) >= 12 + Floor(Var(8)) || Var(7) >= 35 || (EnemyNear(Root,Var(55)),StateType = A && Var(8) <= 1)
+trigger4 = Var(7) != 0
+trigger4 = Var(10) = 11
+trigger4 = Var(13) >= 8 + Floor(Var(8)) || Var(13) >= 30 || (EnemyNear(Root,Var(55)),StateType = A && Var(8) <= 3)
+var(6) = 1
+ignorehitpause = 1
+
+[State 25000, Guard_4]
+type = VarSet
+triggerall = Var(6) = 0
+trigger1 = EnemyNear(Root,Var(55)),StateType = A
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = Random < Floor(1000 - Abs(EnemyNear(Root,Var(55)),Pos Y * 6))
+var(6) = -1
+ignorehitpause = 1
+
+[State 25000, Guard_5]
+type = VarSet
+trigger1 = GameTime%60 = 0
+var(8) = 1 * (Random%(21 - Root,Var(59)))
+
+[State 25000, Guard_6]
+type = VarSet
+triggerall = Var(9) > 1
+trigger1 = Var(6) = 1
+trigger2 = Var(9) > 59
+trigger3 = Root,StateType = C
+trigger3 = Root,StateNo = [120,159]
+trigger4 = Root,StateType = S
+trigger4 = Root,StateNo = [5000,5099]
+var(9) = 0
+ignorehitpause = 1
+
+[State 25000, Guard_7]
+type = VarSet
+trigger1 = EnemyNear(Root,Var(55)),StateType = A
+var(9) = 1
+ignorehitpause = 1
+
+[State 25000, Guard_8]
+type = VarAdd
+trigger1 = Var(9) > 0
+trigger1 = EnemyNear(Root,Var(55)),StateType != A
+var(9) = 1
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;相手StateType反応
+
+[State 25000, StateNo]
+type = VarSet
+trigger1 = 1
+v = 10
+value = EnemyNear(Root,Var(55)),StateNo
+
+[State 25000, StateNo]
+type = VarSet
+trigger1 = Var(11) != 0
+trigger1 = EnemyNear(Root,Var(55)),MoveType != A
+v = 11
+value = 0
+ignorehitpause = 1
+
+[State 25000, StateNo]
+type = VarSet
+trigger1 = Var(11) = 0
+trigger1 = EnemyNear(Root,Var(55)),StateNo = Var(10)
+trigger1 = EnemyNear(Root,Var(55)),StateTime = 1
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),StateType != A
+v = 11
+value = 1
+ignorehitpause = 1
+
+[State 25000, StateNo]
+type = VarSet
+trigger1 = Var(11) = 0
+trigger1 = EnemyNear(Root,Var(55)),StateNo = Var(10)
+trigger1 = EnemyNear(Root,Var(55)),StateTime = 1
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),StateType = A
+v = 11
+value = 2
+ignorehitpause = 1
+
+[State 25000, StateNo]
+type = VarSet
+trigger1 = Var(11) = 1
+trigger1 = EnemyNear(Root,Var(55)),StateNo = Var(10)
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),StateType = A
+v = 11
+value = Var(11) + 10
+ignorehitpause = 1
+
+[State 25000, StateNo]
+type = VarSet
+trigger1 = Var(11) = 2
+trigger1 = EnemyNear(Root,Var(55)),StateNo = Var(10)
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),StateType != A
+v = 11
+value = Var(11) + 10
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;攻撃間合い簡易判定
+
+[State 25000, P2BodyDist X]
+type = VarSet
+triggerall = Root,P2BodyDist X > 70
+triggerall = EnemyNear(Root,Var(55)),StateNo >= 200
+trigger1 = Root,MoveType = H
+trigger1 = Root,StateNo = [120,159]
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),HitDefAttr = SCA, NA, SA, HA
+v = 12
+value = IfElse(Floor(Root,P2BodyDist X) > Var(12), Floor(Root,P2BodyDist X), Var(12))
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;総合攻撃時間簡易判定
+
+[State 25000, AttackTime_1]
+type = VarSet
+triggerall = Var(13) != 0
+trigger1 = EnemyNear(Root,Var(55)),MoveType != A
+trigger2 = EnemyNear(Root,Var(55)),Time = 1
+trigger2 = EnemyNear(Root,Var(55)),StateNo >= 200
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo >= 200
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo != EnemyNear(Root,Var(55)),StateNo
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo + 1 != EnemyNear(Root,Var(55)),StateNo
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo + 2 != EnemyNear(Root,Var(55)),StateNo
+trigger3 = EnemyNear(Root,Var(55)),Time = 1
+trigger3 = EnemyNear(Root,Var(55)),StateNo >= 200
+trigger3 = EnemyNear(Root,Var(55)),PrevStateNo >= 200
+trigger3 = EnemyNear(Root,Var(55)),PrevStateNo = EnemyNear(Root,Var(55)),StateNo
+v = 13
+value = 0
+ignorehitpause = 1
+
+[State 25000, AttackTime_2]
+type = VarAdd
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+v = 13
+value = 1
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;相手StateNo常時監視
+
+[State 25000, StateNo監視]
+Type = VarSet
+Trigger1 = 1
+v = 14
+value = EnemyNear(Root,Var(55)),StateNo
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;弾き 連発制限
+
+[State 25000, StateNo記憶]
+type = VarSet
+trigger1 = Root,StateNo = [750,770]
+trigger1 = Root,Time = 1
+v = 15
+value = Var(14)
+ignorehitpause = 1
+
+[State 25000, 弾き 制御解除]
+Type = VarAdd
+TriggerAll = Root,Var(59) > 0
+TriggerAll = Var(16) > 0
+trigger1 = Var(14) != Var(15)
+v = 16
+value = 0
+ignorehitpause = 1
+
+[State 25000, 弾き 制御解除]
+Type = VarAdd
+TriggerAll = Root,Var(59) > 0
+TriggerAll = Var(16) > 0
+trigger1 = Root,StateNo = [750,770]
+v = 16
+value = -1
+ignorehitpause = 1
+
+[State 25000, 弾き 制御開始]
+type = VarSet
+triggerall = Root,Var(59) > 0
+triggerall = Var(14) = Var(15)
+trigger1 = Root,StateNo = [750,770]
+v = 16
+value = 120
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;空対地攻撃範囲学習
+
+[State 25000, 地対空Ｘ距離]
+type = VarSet
+triggerall = EnemyNear(Root,Var(55)),MoveType = A
+triggerall = EnemyNear(Root,Var(55)),StateType != A
+triggerall = EnemyNear(Root,Var(55)),StateNo >= 200
+triggerall = EnemyNear(Root,Var(55)),HitDefAttr = SCA, NA, SA, HA
+triggerall = Root,StateNo = 5020 && Time = 1
+trigger1 = Root,PrevStateNo = 50
+trigger2 = Root,PrevStateNo = 132
+trigger3 = Root,PrevStateNo = [600,630]
+v = 17
+value = IfElse(Floor(Root,P2BodyDist X) > Var(17), Floor(Root,P2BodyDist X), Var(17))
+
+[State 25000, 地対空Ｙ距離]
+type = VarSet
+triggerall = EnemyNear(Root,Var(55)),MoveType = A
+triggerall = EnemyNear(Root,Var(55)),StateType != A
+triggerall = EnemyNear(Root,Var(55)),StateNo >= 200
+triggerall = EnemyNear(Root,Var(55)),HitDefAttr = SCA, NA, SA, HA
+triggerall = Root,StateNo = 5020 && Time = 1
+trigger1 = Root,PrevStateNo = 50
+trigger2 = Root,PrevStateNo = 132
+trigger3 = Root,PrevStateNo = [600,630]
+v = 18
+value = IfElse(Floor(Root,P2BodyDist Y) > Var(18), Floor(Root,P2BodyDist Y), Var(18))
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;攻撃判定出現からの総合時間
+
+[State 25000, AttrTime_1]
+type = VarSet
+triggerall = Var(19) != 0
+trigger1 = EnemyNear(Root,Var(55)),MoveType != A
+trigger2 = EnemyNear(Root,Var(55)),Time = 1
+trigger2 = EnemyNear(Root,Var(55)),StateNo >= 200
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo >= 200
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo != EnemyNear(Root,Var(55)),StateNo
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo + 1 != EnemyNear(Root,Var(55)),StateNo
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo + 2 != EnemyNear(Root,Var(55)),StateNo
+trigger3 = EnemyNear(Root,Var(55)),Time = 1
+trigger3 = EnemyNear(Root,Var(55)),StateNo >= 200
+trigger3 = EnemyNear(Root,Var(55)),PrevStateNo >= 200
+trigger3 = EnemyNear(Root,Var(55)),PrevStateNo = EnemyNear(Root,Var(55)),StateNo
+v = 19
+value = 0
+ignorehitpause = 1
+
+[State 25000, AttrTime_2]
+type = VarAdd
+trigger1 = EnemyNear(Root,Var(55)),HitDefAttr = SCA, NA, SA, HA
+v = 19
+value = 1
+ignorehitpause = 1
+
+[State 25000, 弾き判断]
+type = VarSet
+trigger1 = EnemyNear(Root,Var(55)),MoveType != A
+trigger2 = EnemyNear(Root,Var(55)),StateNo >= 200
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo >= 200
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo != EnemyNear(Root,Var(55)),StateNo
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo + 1 != EnemyNear(Root,Var(55)),StateNo
+trigger2 = EnemyNear(Root,Var(55)),PrevStateNo + 2 != EnemyNear(Root,Var(55)),StateNo
+v = 20
+value = 0
+ignorehitpause = 1
+
+[State 25000, 弾き判断]
+type = VarSet
+triggerall = Var(20) = 0
+triggerall = Var(11) = 2
+triggerall = Var(13) != 0
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),Vel Y < 0
+v = 20
+value = 1
+ignorehitpause = 1
+
+[State 25000, 弾き判断]
+type = VarSet
+triggerall = Var(20) = 0
+triggerall = Var(13) != 0
+trigger1 = Var(19) > 10
+v = 20
+value = 2
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;起き上がり投げ無敵時間測定（デフォルト値のみ有効）
+
+[State 25000, Invincible]
+type = VarSet
+trigger1 = P2StateType = L
+var(21) = -1
+ignorehitpause = 1
+
+[State 25000, Invincible]
+type = VarAdd
+triggerall = Var(21) > 0
+trigger1 = P2StateType != L
+var(21) = -1
+ignorehitpause = 1
+
+[State 25000, Invincible]
+type = VarSet
+triggerall = Var(21) = -1
+trigger1 = P2StateType != L
+var(21) = 13
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;起き上がり後リバサ・暴れ感知
+
+[State 25000, Reversal]
+type = VarSet
+triggerall = Var(21) > 0
+trigger1 = Root,MoveType != H
+trigger1 = P2MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),Time = 1
+var(22) = Var(22) + 1
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;ガード関係学習
+
+[State 25000, GuardState]
+type = Null
+trigger1 = Root,StateNo = 140
+trigger1 = Root,StateTime = 6
+trigger1 = Var(30) := 0 || 1
+trigger2 = Root,StateNo = [120,159]
+trigger2 = Root,StateType = S
+trigger2 = Var(30) := 1
+trigger3 = Root,StateNo = [120,159]
+trigger3 = Root,StateType = C
+trigger3 = Var(30) := 2
+trigger4 = Root,StateNo = [120,159]
+trigger4 = Root,StateType = A
+trigger4 = Var(30) := 3
+trigger5 = Root,PrevStateNo != [120,159]
+trigger5 = Root,StateNo != [5070,5071]
+trigger5 = Root,StateNo  = [5000,5099]
+trigger5 = Var(30) := 0 || 1
+trigger6 = Root,PrevStateNo = [5070,5071]
+trigger6 = Root,StateNo = 5110
+trigger6 = Var(30) := 0 || 1
+trigger7 = Root,PrevStateNo = [120,159]
+trigger7 = Root,MoveType != H
+trigger7 = Var(30) := 0 || 1
+
+[State 25000, やられ状態判別補助]
+type = VarSet
+trigger1 = Var(29) = 0
+trigger1 = EnemyNear(Root,Var(55)),HitDefAttr = SCA, NA, SA, HA
+trigger1 = Root,MoveType = H
+trigger1 = Root,StateNo != [120,159]
+trigger1 = Root,StateNo != [5000,5099]
+var(29) = 1
+ignorehitpause = 1
+
+[State 25000, やられ状態判別補助]
+type = VarSet
+trigger1 = Var(29) = 1
+trigger1 = Root,MoveType != H || Root,Time > 1
+var(29) = 0
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;投げ技学習
+
+[State 25000, 投げ判別]
+type = VarSet
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = Root,Var(31) = 0
+trigger1 = P2MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),HitDefAttr = SCA, NT, ST, HT
+trigger1 = EnemyNear(Root,Var(55)),Time > 1
+var(31) = P2StateNo
+ignorehitpause = 1
+
+[State 25000, 投げ判別]
+type = VarSet
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = Root,Var(31) != 0 && Root,Var(32) = 0
+triggerall = P2StateNo != Root,Var(31)
+trigger1 = P2MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),HitDefAttr = SCA, NT, ST, HT
+trigger1 = EnemyNear(Root,Var(55)),Time > 1
+var(32) = P2StateNo
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;中段攻撃学習
+
+[State -1, 中段判別]
+type = VarSet
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = !EnemyNear(Root,Var(55)),HitDefAttr = SCA, NT, ST, HT
+triggerall = Root,Alive
+triggerall = Root,Var(33) = 0
+trigger1 = Var(30) = 2
+trigger1 = EnemyNear(Root,Var(55)),Time > 1
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),StateType != A
+trigger1 = Var(29) = 1 || (Root,StateNo = [5000,5099])
+var(33) = IfElse(EnemyNear(Root,Var(55)),StateNo >= 200, EnemyNear(Root,Var(55)),StateNo, EnemyNear(Root,Var(55)),anim)
+ignorehitpause = 1
+
+[State -1, 中段判別]
+type = VarSet
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = !EnemyNear(Root,Var(55)),HitDefAttr = SCA, NT, ST, HT
+triggerall = Root,Alive
+triggerall = Root,Var(33) != 0 && Root,Var(34) = 0
+triggerall = P2StateNo != Root,Var(33)
+trigger1 = Var(30) = 2
+trigger1 = EnemyNear(Root,Var(55)),Time > 1
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),StateType != A
+trigger1 = Var(29) = 1 || (Root,StateNo = [5000,5099])
+var(34) = IfElse(EnemyNear(Root,Var(55)),StateNo >= 200, EnemyNear(Root,Var(55)),StateNo, EnemyNear(Root,Var(55)),anim)
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;下段攻撃学習
+
+[State -1, 下段判別]
+type = VarSet
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = !EnemyNear(Root,Var(55)),HitDefAttr = SCA, NT, ST, HT
+triggerall = Root,Alive
+triggerall = Root,Var(35) = 0
+trigger1 = Var(30) = 1
+trigger1 = EnemyNear(Root,Var(55)),Time > 1
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),StateType != A
+trigger1 = Var(29) = 1 || (Root,StateNo = [5000,5099])
+var(35) = IfElse(EnemyNear(Root,Var(55)),StateNo >= 200, EnemyNear(Root,Var(55)),StateNo, EnemyNear(Root,Var(55)),anim)
+ignorehitpause = 1
+
+[State -1, 下段判別]
+type = VarSet
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = !EnemyNear(Root,Var(55)),HitDefAttr = SCA, NT, ST, HT
+triggerall = Root,Alive
+triggerall = Root,Var(35) != 0 && Root,Var(36) = 0
+triggerall = P2StateNo != Root,Var(35)
+trigger1 = Var(30) = 1
+trigger1 = EnemyNear(Root,Var(55)),Time > 1
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),StateType != A
+trigger1 = Var(29) = 1 || (Root,StateNo = [5000,5099])
+var(36) = IfElse(EnemyNear(Root,Var(55)),StateNo >= 200, EnemyNear(Root,Var(55)),StateNo, EnemyNear(Root,Var(55)),anim)
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;空中ガード不可攻撃・空対空攻撃学習
+
+[State -1, 空中判別]
+type = VarSet
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = !EnemyNear(Root,Var(55)),HitDefAttr = SCA, NT, ST, HT
+triggerall = Root,Vel Y >= -2.0
+triggerall = Root,Var(37) = 0
+trigger1 = Var(30) = 3 || (Root,PrevStateNo = [600,620])
+trigger1 = EnemyNear(Root,Var(55)),Time > 1
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = Var(29) = 1 || (Root,StateNo = [5000,5099])
+var(37) = IfElse(EnemyNear(Root,Var(55)),StateNo >= 200, EnemyNear(Root,Var(55)),StateNo, EnemyNear(Root,Var(55)),anim)
+ignorehitpause = 1
+
+[State -1, 空中判別]
+Type = VarSet
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = !EnemyNear(Root,Var(55)),HitDefAttr = SCA, NT, ST, HT
+triggerall = Root,Vel Y >= -2.0
+triggerall = Root,Var(37) != 0 && Root,Var(38) = 0
+triggerall = P2StateNo != Root,Var(37)
+trigger1 = Var(30) = 3 || (Root,PrevStateNo = [600,620])
+trigger1 = EnemyNear(Root,Var(55)),Time > 1
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+trigger1 = Var(29) = 1 || (Root,StateNo = [5000,5099])
+var(38) = IfElse(EnemyNear(Root,Var(55)),StateNo >= 200, EnemyNear(Root,Var(55)),StateNo, EnemyNear(Root,Var(55)),anim)
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;ガード不能攻撃学習
+
+[State -1, 判別リセット]
+type = Null
+triggerall = Var(39) != 0
+trigger1 = Var(33) != 0
+trigger1 = Var(39) = Var(33)
+trigger1 = Var(33) := 0 || 1
+trigger2 = Var(34) != 0
+trigger2 = Var(39) = Var(34)
+trigger2 = Var(34) := 0 || 1
+trigger3 = Var(35) != 0
+trigger3 = Var(39) = Var(35)
+trigger3 = Var(35) := 0 || 1
+trigger4 = Var(36) != 0
+trigger4 = Var(39) = Var(36)
+trigger4 = Var(36) := 0 || 1
+
+[State -1, ガード不能判別]
+type = Null
+triggerall = Var(39) = 0
+trigger1 = Var(33) != 0
+trigger1 = Var(33) = Var(35) || Var(33) = Var(36)
+trigger1 = Var(39) := Var(33)
+trigger2 = Var(34) != 0
+trigger2 = Var(34) = Var(35) || Var(34) = Var(36)
+trigger2 = Var(39) := Var(34)
+
+[State -1, Time測定リセット]
+type = Null
+trigger1  = Var(33) = 0
+trigger1  = Var(40)/10000 > 0
+trigger1  = Var(40) := Var(40)%10000 || 1
+trigger2  = Var(34) = 0
+trigger2  = Var(40)%10000 > 0
+trigger2  = Var(40) := (Var(40)/10000)*10000 || 1
+trigger3  = Var(35) = 0
+trigger3  = Var(41)/10000 > 0
+trigger3  = Var(41) := Var(41)%10000 || 1
+trigger4  = Var(36) = 0
+trigger4  = Var(41)%10000 > 0
+trigger4  = Var(41) := (Var(41)/10000)*10000 || 1
+trigger5  = Var(37) = 0
+trigger5  = Var(42)/10000 > 0
+trigger5  = Var(42) := Var(42)%10000 || 1
+trigger6  = Var(38) = 0
+trigger6  = Var(42)%10000 > 0
+trigger6  = Var(42) := (Var(42)/10000)*10000 || 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;学習攻撃時間測定
+
+[State -1, Time_1]
+type = VarSet
+trigger1 = Var(33) > 0
+trigger1 = Root,Var(33) = 0
+trigger1 = Root,Var(40)/10000 = 0
+trigger1 = Var(33) = EnemyNear(Root,Var(55)),StateNo
+trigger1 = EnemyNear(Root,Var(55)),StateTime = [0,9999]
+v = 40
+value = Var(40) + EnemyNear(Root,Var(55)),StateTime*10000
+
+[State -1, Time_2]
+type = VarSet
+trigger1 = Var(34) > 0
+trigger1 = Root,Var(34) = 0
+trigger1 = Root,Var(40)%10000 = 0
+trigger1 = Var(34) = EnemyNear(Root,Var(55)),StateNo
+trigger1 = EnemyNear(Root,Var(55)),StateTime = [0,9999]
+v = 40
+value = Var(40) + EnemyNear(Root,Var(55)),StateTime
+
+[State -1, Time_3]
+type = VarSet
+trigger1 = Var(35) > 0
+trigger1 = Root,Var(35) = 0
+trigger1 = Root,Var(41)/10000 = 0
+trigger1 = Var(35) = EnemyNear(Root,Var(55)),StateNo
+trigger1 = EnemyNear(Root,Var(55)),StateTime = [0,9999]
+v = 41
+value = Var(41) + EnemyNear(Root,Var(55)),StateTime*10000
+
+[State -1, Time_4]
+type = VarSet
+trigger1 = Var(36) > 0
+trigger1 = Root,Var(36) = 0
+trigger1 = Root,Var(41)%10000 = 0
+trigger1 = Var(36) = EnemyNear(Root,Var(55)),StateNo
+trigger1 = EnemyNear(Root,Var(55)),StateTime = [0,9999]
+v = 41
+value = Var(41) + EnemyNear(Root,Var(55)),StateTime
+
+[State -1, Time_5]
+type = VarSet
+trigger1 = Var(37) > 0
+trigger1 = Root,Var(37) = 0
+trigger1 = Root,Var(42)/10000 = 0
+trigger1 = Var(37) = EnemyNear(Root,Var(55)),StateNo
+trigger1 = EnemyNear(Root,Var(55)),StateTime = [0,9999]
+v = 42
+value = Var(42) + EnemyNear(Root,Var(55)),StateTime*10000
+
+[State -1, Time_6]
+type = VarSet
+trigger1 = Var(38) > 0
+trigger1 = Root,Var(38) = 0
+trigger1 = Root,Var(42)%10000 = 0
+trigger1 = Var(38) = EnemyNear(Root,Var(55)),StateNo
+trigger1 = EnemyNear(Root,Var(55)),StateTime = [0,9999]
+v = 42
+value = Var(42) + EnemyNear(Root,Var(55)),StateTime
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;起き攻め学習（永遠に仮）
+
+[State 25000, 起き攻め学習]
+type = Null
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+trigger1 = Var(45) = 0
+trigger1 = Root,StateNo = 5120
+trigger1 = P2MoveType = A
+trigger1 = Var(45) := P2StateNo
+
+[State 25000, 起き攻め学習]
+type = Null
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = Var(45) > 0
+triggerall = Var(46) = 0
+trigger1 = Root,StateNo = 0
+trigger1 = Root,PrevStateNo = 5120
+trigger1 = P2MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),HitDefAttr = SCA, NA, SA, HA
+trigger1 = Var(45)  = P2StateNo
+trigger1 = Var(46) := Var(45)
+trigger2 = Root,StateNo = 0
+trigger2 = Root,PrevStateNo = 5120
+trigger2 = P2MoveType = A
+trigger2 = !EnemyNear(Root,Var(55)),HitDefAttr = SCA, NA, SA, HA
+trigger2 = Var(45)  = P2StateNo
+trigger2 = Var(46) := -1
+trigger3 = Var(45) != P2Stateno
+trigger3 = Var(46) := -1
+
+[State 25000, 起き攻め学習]
+type = Null
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = Var(46) = -1
+trigger1 = Var(45) > 0
+trigger1 = Var(45) := 0 || 1
+trigger2 = Var(45) = 0
+trigger2 = Var(46) := 0 || 1
+
+[State 25000, 起き攻め学習]
+type = Null
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = Var(45) > 0 && Var(46) > 0
+trigger1 = Var(45) = Var(46)
+trigger1 = Var(45) := 0 || 1
+
+[State 25000, 起き攻め学習2]
+type = Null
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = Var(45) > 0
+triggerall = Var(46) > 0 && Var(47) = 0
+trigger1 = Root,StateNo = 0
+trigger1 = Root,PrevStateNo = 5120
+trigger1 = P2MoveType = A
+trigger1 = EnemyNear(Root,Var(55)),HitDefAttr = SCA, NA, SA, HA
+trigger1 = Var(45)  = P2StateNo
+trigger1 = Var(47) := Var(45)
+trigger2 = Root,StateNo = 0
+trigger2 = Root,PrevStateNo = 5120
+trigger2 = P2MoveType = A
+trigger2 = !EnemyNear(Root,Var(55)),HitDefAttr = SCA, NA, SA, HA
+trigger2 = Var(45)  = P2StateNo
+trigger2 = Var(47) := Var(45)
+trigger3 = Var(45) != P2StateNo
+trigger3 = Var(47) := -1
+
+[State 25000, 起き攻め学習2]
+type = Null
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerAll = Var(47) = -1
+trigger1 = Var(45) > 0
+trigger1 = Var(45) := 0 || 1
+trigger2 = Var(45) = 0
+trigger2 = Var(47) := 0 || 1
+
+[State 25000, 起き攻め学習2]
+type = Null
+triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
+triggerall = Var(45) > 0 && Var(47) > 0
+trigger1 = Var(45) = Var(47)
+trigger1 = Var(45) := -1
+
+;攻撃Time測定
+[State 25000, Time測定]
+type = Null
+trigger1 = Var(46) > 0
+trigger1 = Var(43) = 0
+trigger1 = Var(46) = EnemyNear(Root,Var(55)),StateNo
+trigger1 = Root,MoveType = H
+trigger1 = Root,StateNo != [120,159]
+trigger1 = Var(43) := EnemyNear(Root,Var(55)),Time
+trigger2 = Var(47) > 0
+trigger2 = Var(44) = 0
+trigger2 = Var(47) = EnemyNear(Root,Var(55)),StateNo
+trigger2 = Root,MoveType = H
+trigger2 = Root,StateNo != [120,159]
+trigger2 = Var(44) := EnemyNear(Root,Var(55)),Time
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;起き上がり行動制限
+
+[State 25000, 起き上がり行動制限1]
+type = VarSet
+triggerall = Var(48) <= 0
+triggerall = Root,AnimTime >= -1
+triggerall = Root,Pos Y >= 0
+trigger1 = Root,StateNo = 5120
+trigger2 = Root,StateNo = 5125
+trigger3 = Root,StateNo = 5126
+trigger4 = Root,StateNo = 5127
+trigger5 = Root,StateNo = 5128
+trigger6 = Root,StateNo = 5200
+var(48) = 10
+ignorehitpause = 1
+
+[State 25000, 起き上がり行動制限2]
+type = VarAdd
+trigger1 = Var(48) > 0
+var(48) = -1
+ignorehitpause = 1
+
+[State 25000, 起き上がり行動制限3]
+type = VarSet
+triggerall = Var(48) <= 0
+trigger1 = !(Root,StateNo = 5120 || Root,StateNo = 5125 || Root,StateNo = 5126 || Root,StateNo = 5127 || Root,StateNo = 5128 || Root,StateNo = 5200)
+var(48) = 0
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;相手AnimTime記憶
+
+[State 25000, AnimTime記憶1]
+type = VarSet
+trigger1 = EnemyNear(Root,Var(55)),MoveType != A
+var(49) = 0
+ignorehitpause = 1
+
+[State 25000, AnimTime記憶2]
+type = VarSet
+triggerall = Var(49) = 0
+trigger1 = EnemyNear(Root,Var(55)),Time = 1
+trigger1 = EnemyNear(Root,Var(55)),MoveType = A
+var(49) = EnemyNear(Root,Var(55)),AnimTime
+ignorehitpause = 1

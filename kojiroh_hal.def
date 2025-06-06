@@ -1,0 +1,34 @@
+[Info]
+name = "Kojiroh Sanada"
+displayname = "Kojiroh"
+versiondate = 09,03,2011
+mugenversion = 04,14,2002
+author = "HAL"
+pal.defaults = 1,2,3,4,5,6
+
+; Files for the player
+[Files]
+cmd      = Kojiroh.cmd
+cns      = Kojiroh_01_N.cns
+st       = Kojiroh_01_N.cns
+st0      = Kojiroh_02_S.cns
+st1      = Kojiroh_03_H.cns
+st2      = Kojiroh_04_P.cns
+st3      = Kojiroh_-2-3.cns
+st4      = Kojiroh_Config.cns
+stcommon = Kojiroh_Common.cns
+sprite   = Kojiroh.sff
+anim     = Kojiroh.air
+sound    = Kojiroh.snd
+pal1     = Act/Kojiroh_01.act
+pal2     = Act/Kojiroh_02.act
+pal3     = Act/Kojiroh_03.act
+pal4     = Act/Kojiroh_04.act
+pal5     = Act/Kojiroh_05.act
+pal6     = Act/Kojiroh_06.act
+pal7     = Act/Kojiroh_01.act
+pal8     = Act/Kojiroh_02.act
+pal9     = Act/Kojiroh_03.act
+pal10    = Act/Kojiroh_04.act
+pal11    = Act/Kojiroh_05.act
+pal12    = Act/Kojiroh_06.act
