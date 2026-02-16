@@ -13,6 +13,15 @@ Then Yukihime was made by Ogaki-san... w
 There were more troublesome processes than expected, but I think I managed to get it close to the original specifications.
 Ogaki-san has also remade Kojiroh's older brother, so please try out both Kojirohs!
 
+## Documentation Index
+
+| Document | Description |
+|----------|-------------|
+| [README.md](README.md) | This file — character overview and specifications |
+| [CHARACTER_REACTIONS.md](CHARACTER_REACTIONS.md) | List of opponents with special intros, victory demos, and effects |
+| [TRANSLATION_TABLE.md](TRANSLATION_TABLE.md) | Japanese-to-English translation reference for CNS comments |
+| `Command_Table.txt` | Full move list and command input reference |
+
 ## Character Specifications
 
 I've aimed to reproduce the original as much as possible, but due to various circumstances, there are some parts that cannot be (or have not been) reproduced.
@@ -72,7 +81,7 @@ Default A.I. is not included.
 | 2024/05/04 | Fixes for differences from original, minor bug fixes |
 | 2024/08/09 | Fixes for differences from original, minor bug fixes |
 
-See `Command_Table.txt` for the full move list.
+See `Command_Table.txt` for the full move list, or the [Documentation Index](#documentation-index) above for all related files.
 
 ## Special Thanks
 
