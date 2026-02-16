@@ -18,9 +18,58 @@ Ogaki-san has also remade Kojiroh's older brother, so please try out both Kojiro
 | Document | Description |
 |----------|-------------|
 | [README.md](README.md) | This file — character overview and specifications |
-| [CHARACTER_REACTIONS.md](CHARACTER_REACTIONS.md) | List of opponents with special intros, victory demos, and effects |
+| [CHARACTER_REACTIONS.md](CHARACTER_REACTIONS.md) | Opponent reactions, effects, counterparty triggers |
 | [TRANSLATION_TABLE.md](TRANSLATION_TABLE.md) | Japanese-to-English translation reference for CNS comments |
 | `Command_Table.txt` | Full move list and command input reference |
+
+## System Architecture
+
+### Fight Mode File Structure
+
+The character uses a modular CNS layout via the DEF file:
+
+| Slot | File | Role |
+|------|------|------|
+| `cns` | Kojiroh_01_N.cns | Main states — data, movement, match flow, victory/defeat |
+| `st` | Kojiroh_01_N.cns | State controller (same as main) |
+| `st0` | Kojiroh_02_S.cns | **Special moves** (Shikku-satsu, Koku-satsu, Shobi-sen, Mumeiken, Shunshin, Tenchi, Sange, Mozu Renzan) |
+| `st1` | Kojiroh_03_H.cns | **Super / hidden / combo specials** (Mumeiken-Nie, Rouga-Rei, Kassatsu-Midare Setsugekka) |
+| `st2` | Kojiroh_04_P.cns | **Helpers & projectiles** (Shikku-satsu projectiles, gauges, effects, Mumeiken-Nie helpers) |
+| `st3` | Kojiroh_-2-3.cns | **Statedef -2/-3** — opponent compatibility patches, global effects |
+| `st4` | Kojiroh_Config.cns | Config states (5900, 25000) |
+| `stcommon` | Kojiroh_Common.cns | Shared states — stand, walk, jump, dash, hit, guard, get-up |
+
+**State flow:** `Kojiroh_Common.cns` defines base states (0–155, 5000–5070). `Kojiroh_01_N.cns` handles match phases (170–195, 180–189, 5151). Special moves branch from common states via `ChangeState` triggered by commands.
+
+### Skills → States → Animations
+
+| Skill | State(s) | Anim(s) | Notes |
+|-------|----------|---------|-------|
+| **Shikku-satsu A** (疾空殺) | 1000 | 1000, 51000 | Projectile helper 1050 |
+| **Shikku-satsu B** (疾空殺) | 1010 | 1010, 51000, 51010 | Projectile helpers 1060, 1061 |
+| **Koku-satsu A** (虚空殺) | 1100 | 1100, 51100 | |
+| **Koku-satsu B** (虚空殺) | 1110 | 1110, 51110 | |
+| **Shobi-sen** (翔飛閃) | 1200, 1202, 1205, 1206 | 15110, 15120, 15130 | Multi-phase |
+| **Mumeiken** (無明剣) | 1210, 1220, 1230, 1231 | 1210, 1220, 1230, 1231, 15420 | 3-hit, super-cancelable |
+| **Shunshin** (瞬身) | 1300 | 1300 | Movement, Tenchi cancel |
+| **Tenchi** (天地) | — | — | During Shunshin |
+| **Sange** (散華) | — | — | Technique/Extreme |
+| **Mumeiken-Nie** (無明剣・贄) | 2000–2008 | 2000, 261, 1210, 5950 | Super cancel from Mumeiken |
+| **Rouga-Rei** (狼牙・零) | 3000, 3050–3052, 3091–3099 | 130, 3002 | Guard-crush KO special |
+| **Mozu Renzan** (百舌連斬) | 3500–3573, 3900–3905 | 15100–15130, 15420 | Combo special, timing routes |
+
+### Animations & Counterparties
+
+Animations that change based on opponent (see [CHARACTER_REACTIONS.md](CHARACTER_REACTIONS.md)):
+
+| Anim | Context | Counterparty Trigger |
+|------|---------|----------------------|
+| **181–185, 189** | Victory poses | 181/182/183 = default; 184 = washizuka, sanada_ani; 185 = Mukuro |
+| **9185** | Mirror match Explod | Kojiroh Sanada (any name variant) |
+| **5950** | Mumeiken-Nie center performance | Single/Team vs Kojiroh Sanada (HAL) — StateTypeSet |
+| **3002** | Rouga-Rei / Kassatsu-Midare | Opponent Kojiroh in 3002 → LifeSet trigger |
+
+**Victory demo flow (State 180):** `MatchOver` + `Time=20` → branch by `Enemy,Name` to State 184 (washizuka/sanada_ani), 185 (Mukuro), 182 (Power), or 183 (Technique/Extreme).
 
 ## Character Specifications
 
