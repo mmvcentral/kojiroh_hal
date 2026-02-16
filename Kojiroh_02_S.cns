@@ -1,8 +1,8 @@
 ;---------------------------------------------------------------------------
-; 必殺技
+; Special moves
 ;---------------------------------------------------------------------------
 ;---------------------------------------------------------------------------
-; 疾空殺Ａ
+; Shikku-satsu A (Swift Sky Kill A)
 [Statedef 1000]
 type     = S
 movetype = A
@@ -100,7 +100,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; 疾空殺Ｂ
+; Shikku-satsu B (Swift Sky Kill B)
 [Statedef 1010]
 type     = S
 movetype = A
@@ -239,7 +239,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; 虚空殺Ａ
+; Koku-satsu A (Void Kill A)
 [Statedef 1100]
 type     = S
 movetype = A
@@ -314,7 +314,7 @@ bindtime = 1
 sprpriority = 3
 ignorehitpause = 1
 
-;力
+;Power
 [State 1100, 10]
 type = HitDef
 trigger1 = Var(1) = 0
@@ -356,7 +356,7 @@ fall = 1
 fall.recover = 1
 fall.recovertime = 25
 
-;技
+;Technique
 [State 1100, 11]
 type = HitDef
 trigger1 = Var(1) = 1
@@ -398,7 +398,7 @@ fall = 1
 fall.recover = 1
 fall.recovertime = 25
 
-;極
+;Extreme
 [State 1100, 12]
 type = HitDef
 trigger1 = Var(1) = 2
@@ -476,7 +476,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; 虚空殺Ｂ
+; Koku-satsu B (Void Kill B)
 [Statedef 1110]
 type     = S
 movetype = A
@@ -551,7 +551,7 @@ bindtime = 1
 sprpriority = 3
 ignorehitpause = 1
 
-;力
+;Power
 [State 1110, 10]
 type = HitDef
 trigger1 = Var(1) = 0
@@ -593,7 +593,7 @@ fall = 1
 fall.recover = 1
 fall.recovertime = 25
 
-;技
+;Technique
 [State 1110, 11]
 type = HitDef
 trigger1 = Var(1) = 1
@@ -635,7 +635,7 @@ fall = 1
 fall.recover = 1
 fall.recovertime = 25
 
-;極
+;Extreme
 [State 1110, 12]
 type = HitDef
 trigger1 = Var(1) = 2
@@ -879,7 +879,7 @@ sprpriority = 3
 removeongethit = 1
 ignorehitpause = 1
 
-;共通１
+;Common 1
 [State 1200, 24]
 type = HitDef
 trigger1 = Var(9) = 0
@@ -920,7 +920,7 @@ numhits = 0
 yaccel = .45
 id = 1200
 
-;共通２
+;Common 2
 [State 1200, 25]
 type = HitDef
 trigger1 = Var(9) = 0
@@ -963,7 +963,7 @@ numhits = 0
 yaccel = .45
 id = 1205
 
-;力
+;Power
 [State 1200, 26]
 type = HitDef
 trigger1 = Var(1) = 0
@@ -1002,7 +1002,7 @@ p2facing = IfElse(Var(7)=0,1,0)
 yaccel = .45
 id = 1200
 
-;技
+;Technique
 [State 1200, 27]
 type = HitDef
 trigger1 = Var(1) = 1
@@ -1041,7 +1041,7 @@ p2facing = IfElse(Var(7)=0,1,0)
 yaccel = .45
 id = 1200
 
-;極
+;Extreme
 [State 1200, 28]
 type = HitDef
 trigger1 = Var(1) = 2
@@ -1134,7 +1134,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; 翔尾閃（初段ヒット）
+; Shobi-sen (first hit)
 [Statedef 1202]
 type     = S
 movetype = A
@@ -1334,7 +1334,7 @@ trigger1 = NumTarget(1205) > 0
 trigger1 = AnimElemTime(6) = 0
 value = 1
 
-;力
+;Power
 [State 1202, 29]
 type = HitDef
 trigger1 = Var(1) = 0
@@ -1377,7 +1377,7 @@ id = 1206
 fall = 1
 fall.recover = 0
 
-;技
+;Technique
 [State 1202, 30]
 type = HitDef
 trigger1 = Var(1) = 1
@@ -1420,7 +1420,7 @@ id = 1206
 fall = 1
 fall.recover = 0
 
-;極
+;Extreme
 [State 1202, 31]
 type = HitDef
 trigger1 = Var(1) = 2
@@ -1514,7 +1514,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; 翔尾閃（初段ヒット・相手やられ）
+; Shobi-sen (first hit, opponent hit)
 [Statedef 1205]
 type     = S
 movetype = H
@@ -1538,7 +1538,7 @@ trigger1 = AnimTime = 0
 value = 1206
 
 ;---------------------------------------------------------------------------
-; 翔尾閃（初段ヒット・相手ダウン）
+; Shobi-sen (first hit, opponent down)
 [Statedef 1206]
 type     = L
 movetype = H
@@ -1674,7 +1674,7 @@ trigger1 = Time = 25
 value = 5120
 
 ;---------------------------------------------------------------------------
-; 無明剣
+; Mumeiken (Darkness Sword)
 [Statedef 1210]
 type     = S
 movetype = A
@@ -1762,7 +1762,7 @@ bindtime = 1
 sprpriority = 3
 ignorehitpause = 1
 
-;力
+;Power
 [State 1210, 13]
 type = HitDef
 trigger1 = Var(1) = 0
@@ -1880,7 +1880,7 @@ p2facing = IfElse(Var(7)=0,1,0)
 yaccel = .45
 id = 1212
 
-;技
+;Technique
 [State 1210, 16]
 type = HitDef
 trigger1 = Var(1) = 1
@@ -1998,7 +1998,7 @@ p2facing = IfElse(Var(7)=0,1,0)
 yaccel = .45
 id = 1212
 
-;極
+;Extreme
 [State 1210, 19]
 type = HitDef
 trigger1 = Var(1) = 2
@@ -2215,7 +2215,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; 瞬塵
+; Shunshin (Instant Dust)
 [Statedef 1220]
 type     = S
 movetype = A
@@ -2384,7 +2384,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; 天地（始動）
+; Tenchi (Heaven and Earth, startup)
 [Statedef 1230]
 type     = S
 movetype = A
@@ -2525,7 +2525,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; 投げ（投げている自分）
+; Throw (thrower self)
 [Statedef 1231]
 type     = S
 movetype = A
@@ -2648,7 +2648,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; 投げ（投げられている相手１）
+; Throw (thrown opponent 1)
 [Statedef 1235]
 type     = S
 movetype = H
@@ -2708,7 +2708,7 @@ trigger1 = Vel Y > 0
 value = 1236
 
 ;---------------------------------------------------------------------------
-; 投げ（投げられている相手２）
+; Throw (thrown opponent 2)
 [Statedef 1236]
 type     = L
 movetype = H
@@ -2823,7 +2823,7 @@ trigger1 = Time = 60
 value = 5120
 
 ;---------------------------------------------------------------------------
-; 散華
+; Sange (Scattered Blossoms)
 [Statedef 1300]
 type     = S
 movetype = A
@@ -2856,7 +2856,7 @@ trigger1 = AnimElemTime(3) = 0
 value = S23,3
 channel = 0
 
-;技
+;Technique
 [State 1300, 5]
 type = HitDef
 trigger1 = Var(1) = 1
@@ -2899,7 +2899,7 @@ fall = 1
 fall.recover = 1
 fall.recovertime = 9999
 
-;極
+;Extreme
 [State 1300, 6]
 type = HitDef
 trigger1 = Var(1) = 2
@@ -2978,7 +2978,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; 鋼体術
+; Steel body technique
 [Statedef 1991]
 type     = S
 movetype = I
@@ -3054,7 +3054,7 @@ type = DestroySelf
 trigger1 = Time > 5
 
 ;---------------------------------------------------------------------------
-; 打ち上げ吹っ飛び受身可能１
+; Launch knockdown recovery possible 1
 [Statedef 1996]
 type     = A
 movetype = H
@@ -3129,7 +3129,7 @@ trigger1 = Pos Y >= 0
 value = 5100
 
 ;---------------------------------------------------------------------------
-; 打ち上げ吹っ飛び受身可能２
+; Launch knockdown recovery possible 2
 [Statedef 1997]
 type     = A
 movetype = H
@@ -3210,7 +3210,7 @@ trigger1 = Pos Y >= 0
 value = 5100
 
 ;---------------------------------------------------------------------------
-; 通常吹っ飛び受身可能１
+; Normal knockdown recovery possible 1
 [Statedef 1998]
 type     = A
 movetype = H
@@ -3273,7 +3273,7 @@ trigger1 = Vel Y > 0
 value = 5100
 
 ;---------------------------------------------------------------------------
-; 通常吹っ飛び受身可能２
+; Normal knockdown recovery possible 2
 [Statedef 1999]
 type     = U
 movetype = H

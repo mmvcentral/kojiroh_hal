@@ -1,127 +1,127 @@
 ;---------------------------------------------------------------------------
-; 月華の剣士 第二幕 真田小次郎
+; Gekka no Kenshi Act 2 - Sanada Kojiroh
 ;---------------------------------------------------------------------------
 [Data]
-life = 1000               ;体力ゲージの初期値
-power = 3000              ;パワーゲージの初期値
-attack = 100              ;攻撃力（これ以上に設定すると強くなる）
-defence = 100             ;防御力（これ以上に設定すると強くなる）
-fall.defence_up = 50      ;コンボをくらっている時にあがる防御力
-liedown.time = 25         ;倒れてから起上がるまでのフレーム数
-airjuggle = 10            ;空中でどれだけコンボが繋がるか（高くすると無限コンボになるので注意）
-sparkno = 15020           ;hitdefで設定していない時の基本ヒットスパークナンバー
-guard.sparkno = 15210     ;設定してない時のガードナンバー
-KO.echo = 0               ;KOした時に声にエコーをかけるか（１でＯＮ）
+life = 1000               ;Initial life gauge value
+power = 3000              ;Initial power gauge value
+attack = 100              ;Attack power (higher = stronger)
+defence = 100             ;Defence (higher = stronger)
+fall.defence_up = 50      ;Defence increase when being combo'd
+liedown.time = 25         ;Frames from knockdown to get-up
+airjuggle = 10            ;Air combo limit (high values can cause infinite combos)
+sparkno = 15020           ;Default hit spark when not set in hitdef
+guard.sparkno = 15210     ;Default guard spark when not set
+KO.echo = 0               ;Echo on KO voice (1 = ON)
 volume = 255
   IntPersistIndex = 0
 FloatPersistIndex = 0
 
 [Size]
-xscale = 1                ;水平方向の縮尺（通常１）
-yscale = 1                ;垂直方向の縮尺（通常１）
-ground.back = 15          ;キャラの幅(後方,地上)
-ground.front = 15         ;キャラの幅(前方,地上)
-air.back = 15             ;キャラの幅(後方,空中)
-air.front = 15            ;キャラの幅(前方,空中)
-height = 55               ;キャラの高さ
-attack.dist = 160         ;攻撃をした時相手がガード体制に入る最低距離
-proj.attack.dist = 90     ;攻撃をした時相手がガード体制に入る最低距離（飛び道具）
-proj.doscale = 0          ;上で設定した縮尺を飛び道具にも適用するか（１でＯＮ）   
-head.pos = 0,-88          ;頭の大体の座標
-mid.pos = -5,-58          ;体の中心の大体の座標
-shadowoffset = 0          ;影の垂直方向のオフセット
-draw.offset = 0,0         ;使用しない
+xscale = 1                ;Horizontal scale (normally 1)
+yscale = 1                ;Vertical scale (normally 1)
+ground.back = 15          ;Character width (back, ground)
+ground.front = 15         ;Character width (front, ground)
+air.back = 15             ;Character width (back, air)
+air.front = 15            ;Character width (front, air)
+height = 55               ;Character height
+attack.dist = 160         ;Min distance for opponent to enter guard stance on attack
+proj.attack.dist = 90     ;Min distance for guard stance (projectiles)
+proj.doscale = 0          ;Apply scale to projectiles (1 = ON)
+head.pos = 0,-88          ;Approximate head position
+mid.pos = -5,-58          ;Approximate body center position
+shadowoffset = 0          ;Shadow vertical offset
+draw.offset = 0,0         ;Unused
 
 [Velocity]
-walk.fwd  = 2.25          ;前進の速度
-walk.back = -1.7          ;後退の速度
-run.fwd  = 6,0            ;前ダッシュの速度（ホップする時はyを-にする）
-run.back = -6.0,-5.75     ;後ダッシュの速度（ホップする時はyを-にする）
-jump.neu = 0,-10          ;垂直ジャンプの速度
-jump.fwd = 3.0            ;前ジャンプの速度
-jump.back = -2.5          ;後ジャンプの速度
-runjump.fwd = 4.75        ;前ダッシュしながらのジャンプ速度(オプション)
-runjump.back = -4         ;後ダッシュしながらのジャンプ速度(オプション)
+walk.fwd  = 2.25          ;Forward walk speed
+walk.back = -1.7          ;Backward walk speed
+run.fwd  = 6,0            ;Forward dash speed (use negative y for hop)
+run.back = -6.0,-5.75     ;Back dash speed (use negative y for hop)
+jump.neu = 0,-10          ;Neutral jump speed
+jump.fwd = 3.0            ;Forward jump speed
+jump.back = -2.5          ;Back jump speed
+runjump.fwd = 4.75        ;Jump speed during forward dash (option)
+runjump.back = -4         ;Jump speed during back dash (option)
 
 [Movement]
-airjump.num = 0           ;空中でジャンプする回数
-airjump.height = 30       ;空中でジャンプする最低限の高さ
-yaccel = .50              ;重力
-stand.friction = .85      ;立ち状態の摩擦係数
-crouch.friction = .82     ;屈み状態の摩擦係数
+airjump.num = 0           ;Number of air jumps
+airjump.height = 30       ;Minimum height for air jump
+yaccel = .50              ;Gravity
+stand.friction = .85      ;Standing friction
+crouch.friction = .82     ;Crouching friction
 
 ;---------------------------------------------------------------------------
-; ステイトの解説
+; State explanation
 ; [Statedef STATENO]
-; type = ?      S/C/A/L  S：立ち / C：屈み / A：空中 / L：ダウン
-; movetype = ?  I/A/H    I：通常状態 / A：攻撃状態 / H：ダメージをくらってる状態
-; physics = ?   S/C/A/N  S：立ち / C：屈み / A：空中 / N：無し
-; juggle = ?             その攻撃に使うジャグル数
+; type = ?      S/C/A/L  S:Stand / C:Crouch / A:Air / L:Down
+; movetype = ?  I/A/H    I:Idle / A:Attack / H:Hit
+; physics = ?   S/C/A/N  S:Stand / C:Crouch / A:Air / N:None
+; juggle = ?             Juggle points used by attack
 
 ;---------------------------------------------------------------------------
-; 使用変数一覧
+; Variable list
 
-;var(1)  = 剣質設定
-;var(2)  = 永久防止１
-;var(3)  = 永久防止２
-;var(4)  = ヒット数算出
-;var(5)  = 起き上がり無敵確認
-;var(6)  = 空中受身可能時間算出
-;var(7)  = ステート奪取確認
-;var(8)  = 敗北時音声処理
-;var(9)  = 攻撃ヒット制御
-;var(10) = 完全勝利判定
-;var(11) = 連殺斬判定
-;var(12) = ガー不エフェクト処理
-;var(13) = 弾き成立カウンター判定
-;var(14) = ガード硬直短縮判定
-;var(15) = 翔尾閃ヒット判定
-;var(16) = 無明剣・贄ヒット確認
-;var(17) = 昇華エフェクト出現判定
-;var(18) = 無明剣・贄フィニッシュ位置確認１
-;var(19) = 無明剣・贄フィニッシュ位置確認２
-;var(20) = 狼牙・零ガー不判定
-;var(21) = 起き上がり相手位置確認
-;var(22) = ガード硬直短縮用HitTime記憶
-;var(23) = 根性値初撃用体力常時監視
-;var(24) = 根性値初撃用状態監視
-;var(25) = 瞬塵コマンド向き判定１　※人操作用、ＡＩでは省略可
-;var(26) = ダッシュ攻撃判定＆投げ無敵判別
+;var(1)  = Sword style setting
+;var(2)  = Infinite prevention 1
+;var(3)  = Infinite prevention 2
+;var(4)  = Hit count calculation
+;var(5)  = Get-up invincibility check
+;var(6)  = Air recovery time calculation
+;var(7)  = State steal confirmation
+;var(8)  = Defeat voice processing
+;var(9)  = Attack hit control
+;var(10) = Perfect victory judgment
+;var(11) = Rensatsuzan judgment
+;var(12) = Unblockable effect processing
+;var(13) = Deflect counter judgment
+;var(14) = Guard stun reduction judgment
+;var(15) = Shobi-sen hit judgment
+;var(16) = Mumeiken-Nie hit confirmation
+;var(17) = Super cancel effect appearance判定
+;var(18) = Mumeiken-Nie finish position 1
+;var(19) = Mumeiken-Nie finish position 2
+;var(20) = Rouga-Rei unblockable judgment
+;var(21) = Get-up opponent position check
+;var(22) = Guard stun HitTime memory
+;var(23) = Guts first hit life monitor
+;var(24) = Guts first hit state monitor
+;var(25) = Shunshin command direction 1 (human only, AI can omit)
+;var(26) = Dash attack & throw invincibility discrimination
 
-;var(30) = 相手時間常時記憶
-;var(31) = A.I.投げ学習１
-;var(32) = A.I.投げ学習２
-;var(33) = A.I.中段学習１
-;var(34) = A.I.中段学習２
-;var(35) = A.I.下段学習１
-;var(36) = A.I.下段学習２
-;var(37) = A.I.空中ガード不能学習１
-;var(38) = A.I.空中ガード不能学習２
-;var(39) = A.I.ガード不能学習
-;var(40) = A.I.中段攻撃時間学習１・２
-;var(41) = A.I.下段攻撃時間学習１・２
-;var(42) = A.I.空中ガード不能攻撃時間学習１・２
-;var(43) = 立ち中段ガード判断
+;var(30) = Opponent time constant memory
+;var(31) = A.I. throw learning 1
+;var(32) = A.I. throw learning 2
+;var(33) = A.I. mid learning 1
+;var(34) = A.I. mid learning 2
+;var(35) = A.I. low learning 1
+;var(36) = A.I. low learning 2
+;var(37) = A.I. air unblockable learning 1
+;var(38) = A.I. air unblockable learning 2
+;var(39) = A.I. unblockable learning
+;var(40) = A.I. mid attack time learning 1-2
+;var(41) = A.I. low attack time learning 1-2
+;var(42) = A.I. air unblockable time learning 1-2
+;var(43) = Stand mid guard judgment
 
-;var(50) = 各種コンフィグ設定
+;var(50) = Config settings
 ;var(51) = 
 ;var(52) = 
 ;var(53) = 
 ;var(54) = 
-;var(55) = タッグ時相手判別
-;var(56) = 相手進行方向判別
-;var(57) = 剣質即決定スイッチ
-;var(58) = A.I.弾き率設定
-;var(59) = A.I.起動＆レベル設定
+;var(55) = Tag opponent identification
+;var(56) = Opponent direction identification
+;var(57) = Sword style instant decision switch
+;var(58) = A.I. deflect rate setting
+;var(59) = A.I. activation & level setting
 
-;fvar(0)  = カウンター補正
-;fvar(1)  = コンボ補正
-;fvar(2)  = ダメージ値・MUGEN換算
-;fvar(5)  = バウンド速度計算
-;fvar(6)  = 画面幅簡易測定
+;fvar(0)  = Counter correction
+;fvar(1)  = Combo correction
+;fvar(2)  = Damage value MUGEN conversion
+;fvar(5)  = Bounce velocity calculation
+;fvar(6)  = Screen width simple measurement
 
 ;---------------------------------------------------------------------------
-; タイムオーバーで負けた時
+; Lost by time over
 [Statedef 170]
 type = S
 ctrl = 0

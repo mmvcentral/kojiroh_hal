@@ -1,12 +1,12 @@
 ;-| Button Remapping |-----------------------------------------------------
 [Remap]
-a = a	;é„çUåÇ
-b = b	;ã≠çUåÇ
-c = z	;èRÇË
-x = c	;íeÇ´
-y = y	;ìäÇ∞Åiä»à’É{É^ÉìÅj
-z = x	;ã≠çUåÇÅ{èRÇËìØéûâüÇµÅiä»à’É{É^ÉìÅj
-s = s	;íßî≠
+a = a	;Light attack
+b = b	;Heavy attack
+c = z	;Deflect
+x = c	;Shortcut (Heavy+Kick)
+y = y	;Throw (shortcut)
+z = x	;Kick
+s = s	;Taunt
 
 ;-| Default Values |-------------------------------------------------------
 [Defaults]
@@ -594,7 +594,7 @@ name = "CancelGuard"
 command = $B
 time = 1
 
-;-| âüÇµÇ¡ÇœÇ»Çµê›íËÅiÇ¢Ç∂ÇÁÇ»Ç¢Åj-------------------------------------------------------
+;-| ?????????????i?????????j-------------------------------------------------------
 [Command]
 name = "holdfwd"
 command = /$F
@@ -645,7 +645,7 @@ name = "holdz"
 command = /z
 time = 1
 
-; â∫ÇÃãLèqÅ´ÇÕê‚ëŒÇ…è¡Ç≥Ç»Ç¢Ç≈Ç≠ÇæÇ≥Ç¢ÅB
+; ????L?q???????????????????????B
 ;===========================================================================
 [Statedef -1]
 ;===========================================================================
@@ -656,7 +656,7 @@ value = 73228
 ignorehitpause = 1
 
 ;===========================================================================
-;òTâÂÅEóÎ
+;?T??E??
 [State -1, 2146+B]
 type = ChangeState
 value = 3000
@@ -675,7 +675,7 @@ trigger2 = AnimElemTime(2) >= 0
 trigger3 = Time >= 12
 trigger3 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;òTâÂÅEóÎ
+;?T??E??
 [State -1, 2146+B]
 type = ChangeState
 value = 3000
@@ -694,7 +694,7 @@ trigger2 = Command = "2364+B"
 trigger2 = Var(25) = 1
 trigger2 = StateNo = 1220 && (AnimElemTime(2) >= 0 && AnimElemTime(17) < 0)
 
-;òTâÂÅEóÎ
+;?T??E??
 [State -1, 2146+B]
 type = ChangeState
 value = 3000
@@ -714,7 +714,7 @@ trigger3 = StateNo = 261 && (AnimElemTime(1) >= 0 && AnimElemTime(10) < 0)
 trigger4 = StateNo = 430 && (AnimElemTime(4) >= 0 && AnimElemTime(6) < 0)
 trigger5 = StateNo = 3561 && (AnimElemTime(10) >= 0)
 
-;òTâÂÅEóÎ
+;?T??E??
 [State -1, 2146+B]
 type = ChangeState
 value = 3000
@@ -741,7 +741,7 @@ trigger10 = StateNo = 410 && (AnimElemTime(9) >= 0 && AnimElemTime(14) < 0)
 trigger11 = StateNo = 420 && (AnimElemTime(3) >= 0 && AnimElemTime(5) < 0) && Var(1) != 0
 
 ;===========================================================================
-;ñ≥ñæåïÅEÊ—
+;???????E??
 [State -1, 2146+AB]
 type = ChangeState
 value = 2000
@@ -759,7 +759,7 @@ trigger2 = AnimElemTime(2) >= 0
 trigger3 = Time >= 12
 trigger3 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;ñ≥ñæåïÅEÊ—
+;???????E??
 [State -1, 2146+AB]
 type = ChangeState
 value = 2000
@@ -777,7 +777,7 @@ trigger2 = Command = "2364+AB"
 trigger2 = Var(25) = 1
 trigger2 = StateNo = 1220 && (AnimElemTime(2) >= 0 && AnimElemTime(17) < 0)
 
-;ñ≥ñæåïÅEÊ—
+;???????E??
 [State -1, 2146+AB]
 type = ChangeState
 value = 2000
@@ -797,7 +797,7 @@ trigger4 = StateNo = 430 && (AnimElemTime(4) >= 0 && AnimElemTime(6) < 0)
 trigger5 = StateNo = 1210 && (AnimElemTime(8) >= 0 && AnimElemTime(13) < 0)
 trigger6 = StateNo = 3561 && (AnimElemTime(10) >= 0)
 
-;ñ≥ñæåïÅEÊ—
+;???????E??
 [State -1, 2146+AB]
 type = ChangeState
 value = 2000
@@ -823,7 +823,7 @@ trigger10 = StateNo = 410 && (AnimElemTime(9) >= 0 && AnimElemTime(14) < 0)
 trigger11 = StateNo = 420 && (AnimElemTime(3) >= 0 && AnimElemTime(5) < 0) && Var(1) != 0
 
 ;===========================================================================
-;ãïãÛéEÇ`
+;????E?`
 [State -1, 623+A]
 type = ChangeState
 value = 1100
@@ -840,7 +840,7 @@ trigger2 = AnimElemTime(2) >= 0
 trigger3 = Time >= 12
 trigger3 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;ãïãÛéEÇ`
+;????E?`
 [State -1, 623+A]
 type = ChangeState
 value = 1100
@@ -857,7 +857,7 @@ trigger2 = Command = "421+A"
 trigger2 = Var(25) = 1
 trigger2 = StateNo = 1220 && (AnimElemTime(2) >= 0 && AnimElemTime(17) < 0)
 
-;ãïãÛéEÇ`
+;????E?`
 [State -1, 623+A]
 type = ChangeState
 value = 1100
@@ -874,7 +874,7 @@ trigger2 = StateNo = 240 && (AnimElemTime(5) >= 0 && AnimElemTime(7) < 0) && Var
 trigger3 = StateNo = 430 && (AnimElemTime(4) >= 0 && AnimElemTime(6) < 0)
 trigger4 = StateNo = 3561 && (AnimElemTime(10) >= 0)
 
-;ãïãÛéEÇ`
+;????E?`
 [State -1, 623+A]
 type = ChangeState
 value = 1100
@@ -899,7 +899,7 @@ trigger10 = StateNo = 410 && (AnimElemTime(9) >= 0 && AnimElemTime(14) < 0)
 trigger11 = StateNo = 420 && (AnimElemTime(3) >= 0 && AnimElemTime(5) < 0) && Var(1) != 0
 
 ;---------------------------------------------------------------------------
-;ãïãÛéEÇa
+;????E?a
 [State -1, 623+B]
 type = ChangeState
 value = 1110
@@ -916,7 +916,7 @@ trigger2 = AnimElemTime(2) >= 0
 trigger3 = Time >= 12
 trigger3 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;ãïãÛéEÇa
+;????E?a
 [State -1, 623+B]
 type = ChangeState
 value = 1110
@@ -933,7 +933,7 @@ trigger2 = Command = "421+B"
 trigger2 = Var(25) = 1
 trigger2 = StateNo = 1220 && (AnimElemTime(2) >= 0 && AnimElemTime(17) < 0)
 
-;ãïãÛéEÇa
+;????E?a
 [State -1, 623+B]
 type = ChangeState
 value = 1110
@@ -950,7 +950,7 @@ trigger2 = StateNo = 240 && (AnimElemTime(5) >= 0 && AnimElemTime(7) < 0) && Var
 trigger3 = StateNo = 430 && (AnimElemTime(4) >= 0 && AnimElemTime(6) < 0)
 trigger4 = StateNo = 3561 && (AnimElemTime(10) >= 0)
 
-;ãïãÛéEÇa
+;????E?a
 [State -1, 623+B]
 type = ChangeState
 value = 1110
@@ -975,7 +975,7 @@ trigger10 = StateNo = 410 && (AnimElemTime(9) >= 0 && AnimElemTime(14) < 0)
 trigger11 = StateNo = 420 && (AnimElemTime(3) >= 0 && AnimElemTime(5) < 0) && Var(1) != 0
 
 ;---------------------------------------------------------------------------
-;„ƒîˆëM
+;????M
 [State -1, 214+A]
 type = ChangeState
 value = 1200
@@ -992,7 +992,7 @@ trigger2 = AnimElemTime(2) >= 0
 trigger3 = Time >= 12
 trigger3 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;„ƒîˆëM
+;????M
 [State -1, 214+A]
 type = ChangeState
 value = 1200
@@ -1009,7 +1009,7 @@ trigger2 = Command = "236+A"
 trigger2 = Var(25) = 1
 trigger2 = StateNo = 1220 && (AnimElemTime(2) >= 0 && AnimElemTime(17) < 0)
 
-;„ƒîˆëM
+;????M
 [State -1, 214+A]
 type = ChangeState
 value = 1200
@@ -1026,7 +1026,7 @@ trigger2 = StateNo = 240 && (AnimElemTime(5) >= 0 && AnimElemTime(7) < 0) && Var
 trigger3 = StateNo = 430 && (AnimElemTime(4) >= 0 && AnimElemTime(6) < 0)
 trigger4 = StateNo = 3561 && (AnimElemTime(10) >= 0)
 
-;„ƒîˆëM
+;????M
 [State -1, 214+A]
 type = ChangeState
 value = 1200
@@ -1051,7 +1051,7 @@ trigger10 = StateNo = 410 && (AnimElemTime(9) >= 0 && AnimElemTime(14) < 0)
 trigger11 = StateNo = 420 && (AnimElemTime(3) >= 0 && AnimElemTime(5) < 0) && Var(1) != 0
 
 ;---------------------------------------------------------------------------
-;ñ≥ñæåï
+;??????
 [State -1, 214+B]
 type = ChangeState
 value = 1210
@@ -1068,7 +1068,7 @@ trigger2 = AnimElemTime(2) >= 0
 trigger3 = Time >= 12
 trigger3 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;ñ≥ñæåï
+;??????
 [State -1, 214+B]
 type = ChangeState
 value = 1210
@@ -1085,7 +1085,7 @@ trigger2 = Command = "236+B"
 trigger2 = Var(25) = 1
 trigger2 = StateNo = 1220 && (AnimElemTime(2) >= 0 && AnimElemTime(17) < 0)
 
-;ñ≥ñæåï
+;??????
 [State -1, 214+B]
 type = ChangeState
 value = 1210
@@ -1102,7 +1102,7 @@ trigger2 = StateNo = 240 && (AnimElemTime(5) >= 0 && AnimElemTime(7) < 0) && Var
 trigger3 = StateNo = 430 && (AnimElemTime(4) >= 0 && AnimElemTime(6) < 0)
 trigger4 = StateNo = 3561 && (AnimElemTime(10) >= 0)
 
-;ñ≥ñæåï
+;??????
 [State -1, 214+B]
 type = ChangeState
 value = 1210
@@ -1127,7 +1127,7 @@ trigger10 = StateNo = 410 && (AnimElemTime(9) >= 0 && AnimElemTime(14) < 0)
 trigger11 = StateNo = 420 && (AnimElemTime(3) >= 0 && AnimElemTime(5) < 0) && Var(1) != 0
 
 ;---------------------------------------------------------------------------
-;èuêo
+;?u?o
 [State -1, 214+C]
 type = ChangeState
 value = 1220
@@ -1144,7 +1144,7 @@ trigger2 = AnimElemTime(2) >= 0
 trigger3 = Time >= 12
 trigger3 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;èuêo
+;?u?o
 [State -1, 214+C]
 type = ChangeState
 value = 1220
@@ -1161,7 +1161,7 @@ trigger2 = StateNo = 240 && (AnimElemTime(5) >= 0 && AnimElemTime(7) < 0) && Var
 trigger3 = StateNo = 430 && (AnimElemTime(4) >= 0 && AnimElemTime(6) < 0)
 trigger4 = StateNo = 3561 && (AnimElemTime(10) >= 0)
 
-;èuêo
+;?u?o
 [State -1, 214+C]
 type = ChangeState
 value = 1220
@@ -1186,7 +1186,7 @@ trigger10 = StateNo = 410 && (AnimElemTime(9) >= 0 && AnimElemTime(14) < 0)
 trigger11 = StateNo = 420 && (AnimElemTime(3) >= 0 && AnimElemTime(5) < 0) && Var(1) != 0
 
 ;---------------------------------------------------------------------------
-;ìVín
+;?V?n
 [State -1, 214+C-C]
 type = ChangeState
 value = 1230
@@ -1200,7 +1200,7 @@ triggerall = Command != "a" && Command != "b" && Command != "x"
 trigger1 = StateNo = 1220 && (AnimElemTime(2) >= 0 && AnimElemTime(14) < 0)
 
 ;---------------------------------------------------------------------------
-;éæãÛéEÇ`
+;????E?`
 [State -1, 236+A]
 type = ChangeState
 value = 1000
@@ -1217,7 +1217,7 @@ trigger2 = AnimElemTime(2) >= 0
 trigger3 = Time >= 12
 trigger3 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;éæãÛéEÇ`
+;????E?`
 [State -1, 236+A]
 type = ChangeState
 value = 1000
@@ -1234,7 +1234,7 @@ trigger2 = Command = "214+A"
 trigger2 = Var(25) = 1
 trigger2 = StateNo = 1220 && (AnimElemTime(2) >= 0 && AnimElemTime(17) < 0)
 
-;éæãÛéEÇ`
+;????E?`
 [State -1, 236+A]
 type = ChangeState
 value = 1000
@@ -1251,7 +1251,7 @@ trigger2 = StateNo = 240 && (AnimElemTime(5) >= 0 && AnimElemTime(7) < 0) && Var
 trigger3 = StateNo = 430 && (AnimElemTime(4) >= 0 && AnimElemTime(6) < 0)
 trigger4 = StateNo = 3561 && (AnimElemTime(10) >= 0)
 
-;éæãÛéEÇ`
+;????E?`
 [State -1, 236+A]
 type = ChangeState
 value = 1000
@@ -1276,7 +1276,7 @@ trigger10 = StateNo = 410 && (AnimElemTime(9) >= 0 && AnimElemTime(14) < 0)
 trigger11 = StateNo = 420 && (AnimElemTime(3) >= 0 && AnimElemTime(5) < 0) && Var(1) != 0
 
 ;---------------------------------------------------------------------------
-;éæãÛéEÇa
+;????E?a
 [State -1, 236+B]
 type = ChangeState
 value = 1010
@@ -1293,7 +1293,7 @@ trigger2 = AnimElemTime(2) >= 0
 trigger3 = Time >= 12
 trigger3 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;éæãÛéEÇa
+;????E?a
 [State -1, 236+B]
 type = ChangeState
 value = 1010
@@ -1310,7 +1310,7 @@ trigger2 = Command = "214+B"
 trigger2 = Var(25) = 1
 trigger2 = StateNo = 1220 && (AnimElemTime(2) >= 0 && AnimElemTime(17) < 0)
 
-;éæãÛéEÇa
+;????E?a
 [State -1, 236+B]
 type = ChangeState
 value = 1010
@@ -1327,7 +1327,7 @@ trigger2 = StateNo = 240 && (AnimElemTime(5) >= 0 && AnimElemTime(7) < 0) && Var
 trigger3 = StateNo = 430 && (AnimElemTime(4) >= 0 && AnimElemTime(6) < 0)
 trigger4 = StateNo = 3561 && (AnimElemTime(10) >= 0)
 
-;éæãÛéEÇa
+;????E?a
 [State -1, 236+B]
 type = ChangeState
 value = 1010
@@ -1352,7 +1352,7 @@ trigger10 = StateNo = 410 && (AnimElemTime(9) >= 0 && AnimElemTime(14) < 0)
 trigger11 = StateNo = 420 && (AnimElemTime(3) >= 0 && AnimElemTime(5) < 0) && Var(1) != 0
 
 ;===========================================================================
-;ïSê„òAéaÅiè„íiÅj
+;?S??A?a?i??i?j
 [State -1, 22+A]
 type = ChangeState
 value = 3500
@@ -1369,7 +1369,7 @@ trigger1 = Ctrl || StateNo = [100,101]
 trigger2 = Time >= 12
 trigger2 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;ïSê„òAéaÅiè„íiÅj
+;?S??A?a?i??i?j
 [State -1, 22+A]
 type = ChangeState
 value = 3500
@@ -1384,7 +1384,7 @@ triggerall = Command = "214+C-22+A"
 triggerall = Command != "b" && Command != "c" && Command != "x"
 trigger1 = StateNo = 1220 && (AnimElemTime(2) >= 0 && AnimElemTime(17) < 0)
 
-;ïSê„òAéaÅiè„íiÅj
+;?S??A?a?i??i?j
 [State -1, 22+A]
 type = ChangeState
 value = 3500
@@ -1414,7 +1414,7 @@ trigger13 = StateNo = 430 && (AnimElemTime(4) >= 0 && AnimElemTime(6) < 0)
 trigger14 = StateNo = 3561 && (AnimElemTime(10) >= 0)
 
 ;---------------------------------------------------------------------------
-;ïSê„òAéaÅiâ∫íiÅj
+;?S??A?a?i???i?j
 [State -1, 22+B]
 type = ChangeState
 value = 3501
@@ -1431,7 +1431,7 @@ trigger1 = Ctrl || StateNo = [100,101]
 trigger2 = Time >= 12
 trigger2 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;ïSê„òAéaÅiâ∫íiÅj
+;?S??A?a?i???i?j
 [State -1, 22+B]
 type = ChangeState
 value = 3501
@@ -1446,7 +1446,7 @@ triggerall = Command = "214+C-22+B"
 triggerall = Command != "a" && Command != "c" && Command != "x"
 trigger1 = StateNo = 1220 && (AnimElemTime(2) >= 0 && AnimElemTime(17) < 0)
 
-;ïSê„òAéaÅiâ∫íiÅj
+;?S??A?a?i???i?j
 [State -1, 22+B]
 type = ChangeState
 value = 3501
@@ -1476,7 +1476,7 @@ trigger13 = StateNo = 430 && (AnimElemTime(4) >= 0 && AnimElemTime(6) < 0)
 trigger14 = StateNo = 3561 && (AnimElemTime(10) >= 0)
 
 ;---------------------------------------------------------------------------
-;éUâÿ
+;?U??
 [State -1, 6+BC]
 type = ChangeState
 value = 1300
@@ -1495,7 +1495,7 @@ trigger3 = Time >= 12
 trigger3 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
 ;===========================================================================
-;ínè„éÛêg
+;?n???g
 [State -1, Recover(Ground)]
 type = ChangeState
 value = 5200
@@ -1512,7 +1512,7 @@ trigger3 = StateNo = 5105 && Time < 5
 trigger4 = StateNo = 5110 && Anim = 5081 && PrevStateNo != 5081
 
 ;---------------------------------------------------------------------------
-;ãÛíÜéÛêg
+;????g
 [State -1, Recover(Air)]
 type = ChangeState
 value = 5210
@@ -1533,7 +1533,7 @@ trigger2 = HitOver
 trigger2 = StateNo = 5040
 
 ;---------------------------------------------------------------------------
-;É_ÉbÉVÉÖ
+;?_?b?V??
 [State -1, Run Fwd]
 type = ChangeState
 value = 100
@@ -1546,7 +1546,7 @@ triggerall = Command = "FF"
 trigger1 = Ctrl
 
 ;---------------------------------------------------------------------------
-;å„ëﬁÉ_ÉbÉVÉÖ
+;???_?b?V??
 [State -1, Run Back]
 type = ChangeState
 value = 105
@@ -1559,7 +1559,7 @@ triggerall = Command = "BB"
 trigger1 = Ctrl || StateNo = 101
 
 ;---------------------------------------------------------------------------
-;ìäÇ∞
+;????
 [State -1, Throw]
 type = ChangeState
 value = 800
@@ -1574,7 +1574,7 @@ triggerall = Command != "holddown"
 trigger1 = Ctrl || StateNo = [100,101]
 
 ;---------------------------------------------------------------------------
-;íeÇ´í«â¡çUåÇ
+;?e??????U??
 [State -1, X-X]
 type = ChangeState
 value = 790
@@ -1590,7 +1590,7 @@ trigger2 = StateNo = 765 && Time >= 12
 trigger3 = StateNo = 795 && Time >= 12
 
 ;---------------------------------------------------------------------------
-;ÉKÅ[ÉhÉLÉÉÉìÉZÉãíeÇ´
+;?K?[?h?L?????Z???e??
 [State -1, 412+X]
 type = ChangeState
 value = 795
@@ -1605,7 +1605,7 @@ triggerall = Command != "a" && Command != "b" && Command != "c"
 trigger1 = StateNo = [150,155]
 
 ;---------------------------------------------------------------------------
-;íeÇ´ÅióßÇøÅj
+;?e???i?????j
 [State -1, X_Stand]
 type = ChangeState
 value = 750
@@ -1620,7 +1620,7 @@ triggerall = Command != "a" && Command != "b" && Command != "c"
 trigger1 = Ctrl || StateNo = [100,101]
 
 ;---------------------------------------------------------------------------
-;íeÇ´ÅiÇµÇ·Ç™Ç›Åj
+;?e???i??????j
 [State -1, X_Crouch]
 type = ChangeState
 value = 760
@@ -1635,7 +1635,7 @@ triggerall = Command != "a" && Command != "b" && Command != "c"
 trigger1 = Ctrl || StateNo = [100,101]
 
 ;---------------------------------------------------------------------------
-;íeÇ´ÅiãÛíÜÅj
+;?e???i???j
 [State -1, X_Air]
 type = ChangeState
 value = 770
@@ -1650,7 +1650,7 @@ triggerall = Command != "a" && Command != "b" && Command != "c"
 trigger1 = Ctrl
 
 ;===========================================================================
-;B+CÅiÉKÅ[ïsÅj
+;B+C?i?K?[?s?j
 [State -1, B+C]
 type = ChangeState
 value = 260
@@ -1668,7 +1668,7 @@ trigger3 = Time >= 12
 trigger3 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
 ;---------------------------------------------------------------------------
-;B+CÅiíÜíiÅj
+;B+C?i???i?j
 [State -1, B+C]
 type = ChangeState
 value = 270
@@ -1684,7 +1684,7 @@ trigger1 = Ctrl || StateNo = [100,101]
 trigger2 = Time >= 12
 trigger2 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
-;B+CÅiíÜíiÅj
+;B+C?i???i?j
 [State -1, B+C]
 type = ChangeState
 value = 270
@@ -1708,7 +1708,7 @@ trigger8 = StateNo = 401 && (AnimElemTime(4) >= 0 && AnimElemTime(8) < 0)
 trigger9 = StateNo = 410 && (AnimElemTime(9) >= 0 && AnimElemTime(14) < 0)
 
 ;---------------------------------------------------------------------------
-;3BÅií«Ç¢ì¢ÇøÅj
+;3B?i????????j
 [State -1, 3B]
 type = ChangeState
 value = 300
@@ -1724,7 +1724,7 @@ trigger2 = P2StateNo = 5101
 trigger3 = P2StateNo = 5110
 
 ;---------------------------------------------------------------------------
-;É_ÉbÉVÉÖçUåÇÅEâ∫íi
+;?_?b?V???U???E???i
 [State -1, Dash_2A]
 type = ChangeState
 value = 440
@@ -1739,7 +1739,7 @@ trigger1 = StateNo = 100 && Var(26) > 0
 trigger2 = StateNo = 101 && Var(26) > 0
 
 ;---------------------------------------------------------------------------
-;É_ÉbÉVÉÖçUåÇÅEè„íi
+;?_?b?V???U???E??i
 [State -1, Dash_5A]
 type = ChangeState
 value = 250
@@ -1915,7 +1915,7 @@ trigger2 = Time >= 12
 trigger2 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
 ;---------------------------------------------------------------------------
-;2AÅiòAéEéaíÜÅj
+;2A?i?A?E?a???j
 [State -1, 2A-A]
 type = ChangeState
 value = 401
@@ -1995,7 +1995,7 @@ trigger2 = Time >= 12
 trigger2 = StateNo = 755 || StateNo = 765 || StateNo = 795
 
 ;---------------------------------------------------------------------------
-;5AÅiòAéEéaíÜÅj
+;5A?i?A?E?a???j
 [State -1, 5A]
 type = ChangeState
 value = 201
@@ -2010,7 +2010,7 @@ trigger1 = MoveContact && Time > 0
 trigger1 = StateNo = 205 && (AnimElemTime(3) >= 0 && AnimElemTime(5) < 0)
 
 ;---------------------------------------------------------------------------
-;5AÅEA
+;5A?EA
 [State -1, 5A-A]
 type = ChangeState
 value = 202
@@ -2059,7 +2059,7 @@ trigger4 = StateNo = 250 && (AnimElemTime(5) >= 0 && AnimElemTime(9) < 0)
 trigger5 = StateNo = 401 && (AnimElemTime(4) >= 0 && AnimElemTime(8) < 0)
 
 ;---------------------------------------------------------------------------
-;5BÅiòAéEéaíÜÅj
+;5B?i?A?E?a???j
 [State -1, 5B]
 type = ChangeState
 value = 211
@@ -2151,7 +2151,7 @@ triggerall = Command != "214+C"
 trigger1 = Ctrl
 
 ;---------------------------------------------------------------------------
-;ÉLÉÉÉìÉZÉãÉWÉÉÉìÉv
+;?L?????Z???W?????v
 [State -1, Jump]
 type = ChangeState
 value = 40
@@ -2167,7 +2167,7 @@ trigger2 = Ctrl
 trigger2 = StateNo = 5120 || StateNo = [5125,5128]
 
 ;---------------------------------------------------------------------------
-;ÉLÉÉÉìÉZÉãï‡Ç´
+;?L?????Z??????
 [State -1, Walk]
 type = ChangeState
 value = 20
@@ -2185,7 +2185,7 @@ trigger2 = Ctrl
 trigger2 = StateNo = 5120 || StateNo = [5125,5128]
 
 ;---------------------------------------------------------------------------
-;ÉLÉÉÉìÉZÉãÇµÇ·Ç™Ç›
+;?L?????Z????????
 [State -1, Crouch]
 type = ChangeState
 value = 10
@@ -2200,7 +2200,7 @@ trigger1 = Ctrl
 trigger1 = StateNo = 5120 || StateNo = [5125,5128]
 
 ;---------------------------------------------------------------------------
-;íßî≠
+;????
 [State -1, Taunt]
 type = ChangeState
 value = 195

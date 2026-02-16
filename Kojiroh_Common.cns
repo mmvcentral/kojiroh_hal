@@ -145,7 +145,7 @@ trigger2 = Anim = 5 && AnimTime = 0
 value = 21
 
 ;---------------------------------------------------------------------------
-; ジャンプ開始
+; Jump start
 [Statedef 40]
 type    = S
 physics = N
@@ -154,7 +154,7 @@ ctrl = 0
 velset = 0,0
 sprpriority = 1
 
-;１Ｆジャンプ
+;1F jump
 [State 40, Jump_1F]
 type = ChangeState
 triggerall = Var(59) = 0
@@ -166,7 +166,7 @@ trigger3 = Command = "b" && Command = "c"
 trigger4 = Command = "b" && Command = "c" && Command = "x"
 value = 41
 
-;キャンセルガード
+;Cancel guard
 [State 40, CancelGuard]
 type = ChangeState
 triggerall = Time = 3
@@ -264,7 +264,7 @@ value = 50
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; １Ｆジャンプ開始
+; 1F jump start
 [Statedef 41]
 type    = A
 physics = N
@@ -501,7 +501,7 @@ trigger1 = AnimElemTime(9) < 0
 value = 0
 
 ;---------------------------------------------------------------------------
-; 前ダッシュ
+; Forward dash
 [Statedef 100]
 type    = S
 movetype= A
@@ -575,7 +575,7 @@ trigger2 = Command = "holddown"
 value = 101
 
 ;---------------------------------------------------------------------------
-; 前ダッシュ（停止）
+; Forward dash (stop)
 [Statedef 101]
 type    = S
 movetype= I
@@ -639,7 +639,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; バックステップ
+; Back step
 [Statedef 105]
 type    = S
 physics = N
@@ -694,7 +694,7 @@ value = 106
 ctrl = 0
 
 ;---------------------------------------------------------------------------
-; バックステップ（着地）
+; Back step (landing)
 [Statedef 106]
 type    = S
 physics = S
@@ -2611,7 +2611,7 @@ type = VarSet
 trigger1 = Time = 0
 var(21) = 0
 
-;前移動起き上がり（仰向け）
+;Forward get-up (face up)
 [State 5120, 6]
 type = ChangeState
 trigger1 = Var(59) = 0
@@ -2620,7 +2620,7 @@ trigger1 = Time = [1,2]
 trigger1 = Command = "holdfwd"
 value = 5125
 
-;後移動起き上がり（仰向け）
+;Backward get-up (face up)
 [State 5120, 6]
 type = ChangeState
 trigger1 = Var(59) = 0
@@ -2629,7 +2629,7 @@ trigger1 = Time = [1,2]
 trigger1 = Command = "holdback"
 value = 5126
 
-;前移動起き上がり（うつ伏せ）
+;Forward get-up (face down)
 [State 5120, 6]
 type = ChangeState
 trigger1 = Var(59) = 0
@@ -2638,7 +2638,7 @@ trigger1 = Time = [1,2]
 trigger1 = Command = "holdfwd"
 value = 5127
 
-;後移動起き上がり（うつ伏せ）
+;Backward get-up (face down)
 [State 5120, 6]
 type = ChangeState
 trigger1 = Var(59) = 0

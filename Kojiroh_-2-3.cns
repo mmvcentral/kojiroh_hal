@@ -2,7 +2,7 @@
 [Statedef -2]
 ;===========================================================================
 ;---------------------------------------------------------------------------
-; システム関連
+; System related
 ;---------------------------------------------------------------------------
 [State -2, ChangeState]
 type = ChangeState
@@ -11,7 +11,7 @@ value = 73228
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 剣質ゲージ表示
+; Sword style gauge display
 [State -2, Helper]
 type = Helper
 triggerall = NumHelper(10000) = 0
@@ -31,7 +31,7 @@ pausemovetime = 999999999
 supermovetime = 999999999
 
 ;---------------------------------------------------------------------------
-; 後の先表示
+; Counter (Ato no Saki) display
 [State -2, Counter View]
 type = Explod
 triggerall = StateNo != [800,810]
@@ -98,7 +98,7 @@ pausemovetime = 999999999
 supermovetime = 999999999
 
 ;---------------------------------------------------------------------------
-; 相手ステート制御
+; Opponent state control
 [State -2, 6C]
 type = TargetState
 trigger1 = NumTarget(241) > 0
@@ -286,7 +286,7 @@ id = 3574
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; ステート奪取確認
+; State steal confirmation
 [State -2, TargetState]
 type = VarSet
 triggerall = Var(7) != 0
@@ -397,7 +397,7 @@ value = 1
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 攻撃ヒット制御
+; Attack hit control
 [State -2, Hit_Attack]
 type = VarSet
 triggerall = Var(9) = 0
@@ -438,7 +438,7 @@ value = 0
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; ゲージ増加抑制
+; Gauge increase suppression
 [State -2, PowerSet]
 type = PowerSet
 triggerall = Power >= 1000
@@ -448,7 +448,7 @@ value = 1000
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 永久防止
+; Infinite prevention
 [State -2, Limit1]
 type = VarSet
 triggerall = Enemy,TeamMode = Single || Enemy,TeamMode = Turns
@@ -486,7 +486,7 @@ value = 0
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 根性値補正
+; Guts value correction
 [State -2, DefenceMulSet]
 type = LifeAdd
 triggerall = Alive
@@ -588,7 +588,7 @@ var(23) = Life
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 弾き成立カウンター判定
+; Deflect counter judgment
 [State -2, Hajiki_Counter]
 type = VarSet
 trigger1 = NumTarget
@@ -614,7 +614,7 @@ value = 0
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; カウンター補正
+; Counter correction
 [State -2, Counter]
 type = VarSet
 trigger1 = P2MoveType != A
@@ -635,7 +635,7 @@ value = 1.300
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; コンボ補正
+; Combo correction
 [State -2, HitCount_Reset]
 type = VarSet
 trigger1 = P2MoveType != H
@@ -705,7 +705,7 @@ value = 0.500
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; ダメージ値・MUGEN換算
+; Damage value MUGEN conversion
 [State -2, Damage Value for MUGEN]
 type = VarSet
 trigger1 = 1
@@ -714,7 +714,7 @@ value = 3.90625
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 叩きつけバウンドエフェクト
+; Slam bounce effect
 [State -2, BoundEffect]
 type = Null;Explod
 triggerall = NumTarget
@@ -749,7 +749,7 @@ pausemovetime = 999999999
 supermovetime = 999999999
 
 ;---------------------------------------------------------------------------
-; 相手砂塵エフェクト
+; Opponent dust effect
 [State -2, Explod]
 type = Explod
 triggerall = NumTarget
@@ -796,7 +796,7 @@ pausemovetime = 999999999
 supermovetime = 999999999
 
 ;---------------------------------------------------------------------------
-; 相手血飛沫エフェクト
+; Opponent blood splatter effect
 [State -2, Explod]
 type = Explod
 triggerall = NumTarget
@@ -818,7 +818,7 @@ pausemovetime = 999999999
 supermovetime = 999999999
 
 ;---------------------------------------------------------------------------
-; 空中受身可能時間算出
+; Air recovery possible time calculation
 [State -2, Recovery_1]
 type = VarSet
 trigger1 = 1
@@ -832,7 +832,7 @@ v = 6
 value = 0
 
 ;---------------------------------------------------------------------------
-; 前方ジャンプ時ガード不可
+; Unblockable during forward jump
 [State -2, NoAirGuard]
 type = AssertSpecial
 trigger1 = !(Var(50) & 8)
@@ -841,7 +841,7 @@ trigger1 = StateNo = 50
 flag = NoAirGuard
 
 ;---------------------------------------------------------------------------
-; ガード短縮リセット
+; Guard stun reset
 [State -2, Guard-Reset]
 type = VarSet
 trigger1 = Var(14) != 0
@@ -859,7 +859,7 @@ value = 0
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 完全勝利判定
+; Perfect victory judgment
 [State -2, Perfect KO]
 type = VarSet
 trigger1 = RoundState = [0,1]
@@ -874,7 +874,7 @@ v = 10
 value = 0
 
 ;---------------------------------------------------------------------------
-; ダッシュ攻撃判定＆投げ無敵判別リセット
+; Dash attack & throw invincibility discrimination reset
 [State -2, DashAttack Reset]
 type = VarSet
 triggerall = Var(26) > 0
@@ -892,7 +892,7 @@ value = 0
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 残像解除
+; Afterimage release
 [State -2, AfterImageTime]
 type = AfterImageTime
 triggerall = StateNo != 1997
@@ -906,7 +906,7 @@ trigger2 = StateNo != [3500,3999]
 time = 0
 
 ;---------------------------------------------------------------------------
-; 乱舞奥義時・青点滅
+; Combo special - blue flash
 [State -2, SC_Flash]
 type = PalFx
 trigger1 = MoveType != H
@@ -917,7 +917,7 @@ time = 1
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; K.O.勝利時背景点滅
+; K.O. victory background flash
 [State -2, KO_Flash]
 type = Helper
 triggerall = NumHelper(15120) = 0
@@ -972,7 +972,7 @@ pausemovetime = 999999999
 supermovetime = 999999999
 
 ;---------------------------------------------------------------------------
-; K.O.勝利時の音消去
+; K.O. victory sound clear
 [State -2, AssertSpecial]
 type = AssertSpecial
 trigger1 = MatchOver = 1
@@ -980,7 +980,7 @@ trigger1 = WinKO
 flag = NoMusic
 
 ;---------------------------------------------------------------------------
-; フィニッシュタイム停止
+; Finish time stop
 [State -2, AssertSpecial]
 type = AssertSpecial
 triggerall = EnemyNear,Life < 4
@@ -994,7 +994,7 @@ flag = TimerFreeze
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 鋼体術ダメージ
+; Steel body technique damage
 [State -2, LifeAdd]
 type = LifeAdd
 triggerall = !IsHelper
@@ -1012,7 +1012,7 @@ trigger1 = Helper(1991),GetHitVar(damage)
 movetype = H
 
 ;---------------------------------------------------------------------------
-; 画面端の飛び越え対策
+; Screen edge overflow countermeasure
 [State -2, Width]
 type = Width
 trigger1 = FrontEdgeDist < 4 && MoveType != H
@@ -1027,7 +1027,7 @@ player = 13-Enemy,Const(size.ground.front),0
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 画面幅簡易測定
+; Screen width simple measurement
 [State -2, VarSet]
 type = VarSet
 trigger1 = 1
@@ -1036,7 +1036,7 @@ value = IfElse((ScreenPos X - Pos X) - 160 <= 0, 1.0, (ScreenPos X - Pos X) / 16
 ignorehitpause = 1
 
 ;--------------------------------------------------------------------------
-; エフェクト点滅
+; Effect flash
 [State -2, ModifyExplod]
 type = ModifyExplod
 trigger1 = GameTime%2 = 0
@@ -1109,9 +1109,9 @@ alpha = 0,256
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 音処理関連
+; Sound processing related
 ;---------------------------------------------------------------------------
-;壁激突音
+;Wall impact sound
 [State -2, PlaySnd]
 type = PlaySnd
 trigger1 = P2StateNo = 242
@@ -1119,7 +1119,7 @@ trigger1 = P2MoveType = H
 trigger1 = Enemy,Time = 1
 value = S6,6
 
-;地面激突音
+;Ground impact sound
 [State -2, PlaySnd]
 type = PlaySnd
 triggerall = NumTarget
@@ -1135,7 +1135,7 @@ trigger7 = Target,StateNo = 3903
 trigger8 = Target,StateNo = 3904
 value = S6,2
 
-;血飛沫音
+;Blood splatter sound
 [State -2, PlaySnd]
 type = PlaySnd
 triggerall = NumTarget
@@ -1146,7 +1146,7 @@ trigger2 = P2StateNo = 3052
 trigger2 = EnemyNear,Time = 1
 value = S20,17
 
-;ダッシュ音停止
+;Dash sound stop
 [State -2, StopSnd]
 type = StopSnd
 trigger1 = MoveType = H
@@ -1156,7 +1156,7 @@ trigger2 = StateNo != 2000
 trigger2 = StateNo != [3501,3502]
 channel = 5
 
-;食らい時の声
+;Hit voice
 [State -2, Damage_Voice]
 type = PlaySnd
 triggerall = Time = 0
@@ -1175,7 +1175,7 @@ value = S24,0+(Random%6)
 channel = 0
 lowpriority = 0
 
-;敗北時の声
+;Defeat voice
 [State -2, Lose_Voice]
 type = PlaySnd
 trigger1 = Var(8) = 0
@@ -1200,9 +1200,9 @@ v = 8
 value = 0
 
 ;---------------------------------------------------------------------------
-; P2Nameステータス変化技対応
+; P2Name status change move compatibility
 ;---------------------------------------------------------------------------
-; 獣を焦がす(黒秋葉)　相手ステータス変化
+; Burn the Beast (Kuro Akiha) - opponent status change
 
 [State -2, Akiha_1]
 type = LifeAdd
@@ -1222,7 +1222,7 @@ trigger1 = Enemy,Var(56) = 1
 value = -33
 
 ;---------------------------------------------------------------------------
-; 略奪/獣を焦がす/獣を窮める　相手用
+; Plunder/Burn the Beast/Corner the Beast - for opponent
 
 [State -2, Akaakiha_1]
 type = LifeAdd
@@ -1250,7 +1250,7 @@ trigger1 = Enemy,Var(47) = 1
 value = -26
 
 ;---------------------------------------------------------------------------
-; パウダースノウ　相手用
+; Powder Snow - for opponent
 
 [State -2, Len_1]
 type = LifeAdd
@@ -1262,7 +1262,7 @@ absolute = 1
 kill = 0
 
 ;---------------------------------------------------------------------------
-; じょうろ　相手用
+; Watering can - for opponent
 
 [State -2, Hisui_1]
 type = LifeAdd
@@ -1281,7 +1281,7 @@ trigger1 = Enemy,Var(47) = 1
 value = -135
 
 ;---------------------------------------------------------------------------
-; がんばりました。EX　相手用
+; Ganbarimashita EX - for opponent
 [State -2, Hisui_3]
 type = LifeAdd
 triggerall = NumEnemy
@@ -1292,7 +1292,7 @@ absolute = 1
 kill = 0
 
 ;---------------------------------------------------------------------------
-; ブラック・クラック　相手用
+; Black Crack - for opponent
 
 [State -2, Warachia_1]
 type = LifeAdd
@@ -1336,7 +1336,7 @@ trigger1 = Enemy,Var(47) = 2 || Enemy,Var(47) = 3 || Enemy,Var(47) = 4
 value = 15
 
 ;---------------------------------------------------------------------------
-; 現代医学の犠牲者です。　相手用
+; Victim of modern medicine - for opponent
 
 [State -2, Kohaku_1]
 type = LifeAdd
@@ -1348,7 +1348,7 @@ absolute = 1
 kill = 0
 
 ;---------------------------------------------------------------------------
-; 毒効果（ドロウィンアルカナ)
+; Poison effect (Droven Arcana)
 
 [State -2, Drowin arcana_1]
 type = PowerAdd
@@ -1378,7 +1378,7 @@ time = 5
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; ■西行寺幽々子　霊符及び寿命相手ステート
+; ■ Yuyuko Saigyouji - spirit talisman and lifespan opponent state
 
 [State -2, Yuyuko_1]
 Type       = LifeAdd
@@ -1390,7 +1390,7 @@ value      = IfElse(Enemy,Var(3) = 1, -2, -3)
 kill       = 0
 
 ;---------------------------------------------------------------------------
-; うどんげ　毒煙幕用（シロトさん）
+; Udonge - poison smoke screen (Shiroto)
 
 [State -2, Udongein_Shiroto_1]
 type = LifeAdd
@@ -1404,9 +1404,9 @@ value = -EnemyNear,Var(40)
 kill = 0
 
 ;---------------------------------------------------------------------------
-; ■脱魂の儀 制御（AuthorName = "mikage_th"）
+; ■ Datsukon no Gi control (AuthorName = "mikage_th")
 
-;振り向き抑制
+; Turn suppression
 [State pos moving]
 type = AssertSpecial
 triggerall = (EnemyNear,Name = "Komachi Onoduka")*(EnemyNear,AuthorName = "mikage_th")*(TeamMode = Single)
@@ -1414,7 +1414,7 @@ trigger1 = (EnemyNear,StateNo = 820)*(EnemyNear,Anim = 823)*(EnemyNear,AnimElem 
 trigger2 = (EnemyNear,StateNo = 821)*(EnemyNear,Anim = 823)*(EnemyNear,AnimElem = 6,43)
 flag = NoAutoTurn
 
-;移動
+; Movement
 [State pos moving]
 type = PosAdd
 triggerall = (Enemynear,Name = "Komachi Onoduka")*(Enemynear,AuthorName = "mikage_th")*(TeamMode = single)
@@ -1423,7 +1423,7 @@ trigger2 = (EnemyNear,StateNo = 821)*(EnemyNear,Anim = 823)*(EnemyNear,AnimElem 
 x = -Ceil(EnemyNear,FVar(36))*Facing*EnemyNear,Facing
 y = -Ceil(EnemyNear,FVar(37))*(StateType != L)
 
-;StateType != A + StateType != L の場合強制落下Stateへ
+; Force fall state when StateType != A and StateType != L
 [State pos moving]
 type = ChangeState
 triggerall = (Enemynear,Name = "Komachi Onoduka")*(Enemynear,AuthorName = "mikage_th")*(TeamMode = single)
@@ -1433,9 +1433,9 @@ trigger2 = (EnemyNear,StateNo = 821)*(EnemyNear,Anim = 823)*(EnemyNear,AnimElem 
 value = 50
 
 ;---------------------------------------------------------------------------
-; ■脱魂の儀 制御（AuthorName = "mikage_th105"）
+; ■ Datsukon no Gi control (AuthorName = "mikage_th105")
 
-;振り向き抑制
+; Turn suppression
 [State pos moving]
 type = AssertSpecial
 triggerall = (Enemynear,Name = "Komachi Onoduka")*(Enemynear,AuthorName = "mikage_th105")*(TeamMode = Single)
@@ -1443,7 +1443,7 @@ trigger1 = (EnemyNear,StateNo = 820)*(EnemyNear,Anim = 823)*(EnemyNear,AnimElem 
 trigger2 = (EnemyNear,StateNo = 821)*(EnemyNear,Anim = 823)*(EnemyNear,AnimElem = 6,43)
 flag = NoAutoTurn
 
-;移動
+; Movement
 [State pos moving]
 type = PosAdd
 triggerall = (Enemynear,Name = "Komachi Onoduka")*(Enemynear,AuthorName = "mikage_th105")*(TeamMode = Single)
@@ -1452,7 +1452,7 @@ trigger2 = (EnemyNear,StateNo = 821)*(EnemyNear,Anim = 823)*(EnemyNear,AnimElem 
 x = -Ceil(EnemyNear,FVar(24))*Facing*EnemyNear,Facing
 y = -Ceil(EnemyNear,FVar(25))*(StateType != L)
 
-;StateType != A + StateType != L の場合強制落下Stateへ
+; Force fall state when StateType != A and StateType != L
 [State pos moving]
 type = ChangeState
 triggerall = (Enemynear,Name = "Komachi Onoduka")*(Enemynear,AuthorName = "mikage_th105")*(TeamMode = Single)
@@ -1462,7 +1462,7 @@ trigger2 = (EnemyNear,StateNo = 821)*(EnemyNear,anim = 823)*(EnemyNear,AnimElem 
 value = 50
 
 ;---------------------------------------------------------------------------
-; ■毒煙幕「瓦斯織物の玉」 制御（AuthorName = "mikage_th"）
+; ■ Poison smoke "Gas Fabric Orb" control (AuthorName = "mikage_th")
 
 [State LifeAdd]
 type = LifeAdd
@@ -1486,7 +1486,7 @@ absolute = 1
 kill = 0
 
 ;---------------------------------------------------------------------------
-; ■毒煙幕「瓦斯織物の玉」 制御（AuthorName = "mikage_th105"）
+; ■ Poison smoke "Gas Fabric Orb" control (AuthorName = "mikage_th105")
 
 [State LifeAdd]
 type = LifeAdd
@@ -1510,9 +1510,9 @@ absolute = 1
 kill = 0
 
 ;---------------------------------------------------------------------------
-; ■土着神の祟り＆ミシャグジさまの祟り 制御
+; ■ Native god curse & Mishaguji-sama curse control
 
-;土着神の祟り
+; Native god curse
 [State LifeAdd]
 type = LifeAdd
 trigger1 = NumEnemy
@@ -1541,7 +1541,7 @@ absolute = 1
 kill = 0
 
 ;---------------------------------------------------------------------------
-; 神尾観鈴　呪い効果付加
+; Misuzu Kamio - curse effect addition
 
 [State -2, LifeAdd]
 type = LifeAdd
@@ -1578,7 +1578,7 @@ time = 1
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; イチコロ毒（SAIKEIユダ）
+; Ichikoro poison (SAIKEI Juda)
 
 [State -2, Juda_1]
 type = LifeAdd
@@ -1603,7 +1603,7 @@ time = 8
 add = 255,0,0
 
 ;-----------------------------------------------------------------------
-; アグリアスモーグリ恩恵
+; Agrias Moogle blessing
 [State -2, Agrias_1]
 type = PalFX
 triggerall = NumEnemy
@@ -1633,7 +1633,7 @@ value = 1
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; 愛原奈都美「挑発」対応ステート
+; Aihara Natsumi "Taunt" compatibility state
 
 [State -2, Natsumi_1]
 type = PowerAdd
@@ -1643,7 +1643,7 @@ trigger1 = EnemyNear,StateNo = 197 && EnemyNear,StateTime = 70
 value = -45
 
 ;---------------------------------------------------------------------------
-; アル･アジフ「挑発」対応ステート
+; Al Azif "Taunt" compatibility state
 
 [State -2, AL_1]
 type = PowerAdd
@@ -1653,7 +1653,7 @@ trigger1 = EnemyNear,StateNo = 195 && EnemyNear,StateTime = 30
 value = -45
 
 ;---------------------------------------------------------------------------
-; マミヤ「挑発」対応ステート
+; Mamiya "Taunt" compatibility state
 
 [State -2, Mamiya_1]
 type = PowerAdd
@@ -1663,7 +1663,7 @@ trigger1 = EnemyNear,StateNo = 195 && EnemyNear,StateTime = 30
 value = 1000
 
 ;---------------------------------------------------------------------------
-; 6C画面スクロール用
+; 6C screen scroll
 
 [State -2, 6C_Helper]
 type = Helper
@@ -1686,7 +1686,7 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 
 ;---------------------------------------------------------------------------
-; 剣閃エフェクト表示用
+; Sword flash effect display
 
 [State -2, Effect_Helper]
 type = Helper
@@ -1702,7 +1702,7 @@ pausemovetime = 2147483647
 supermovetime = 2147483647
 
 ;---------------------------------------------------------------------------
-; A.I.起動用
+; A.I. activation
 
 [State -2, AI_Helper]
 type = Helper
@@ -1722,7 +1722,7 @@ persistent = 0
 pausemovetime = 2147483647
 supermovetime = 2147483647
 
-[State -2, 関係無いステートに行かないように]
+[State -2, PreventUnrelatedState]
 type = ChangeState
 trigger1 = IsHelper(20000)
 trigger1 = StateNo != 20000
@@ -1743,16 +1743,16 @@ persistent = 0
 pausemovetime = 2147483647
 supermovetime = 2147483647
 
-[State -2, 関係無いステートに行かないように]
+[State -2, PreventUnrelatedState]
 type = ChangeState
 trigger1 = IsHelper(25000)
 trigger1 = StateNo != 25000
 value = 25000
 
 ;---------------------------------------------------------------------------
-; デバッグ表示
+; Debug display
 
-;変数確認
+;Variable check
 [State -2, DisplayToClipboard]
 type = Null;DisplayToClipboard
 trigger1 = 1
@@ -1760,7 +1760,7 @@ text = "V(1)=%d V(2)=%d V(3)=%d V(4)=%d V(10)=%d"
 params = Var(1), Var(2), Var(3), Var(4), Var(10)
 ignorehitpause = 1
 
-;挙動確認
+;Behavior check
 [State -2, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
@@ -1768,7 +1768,7 @@ text = "Vel X:%f Vel Y:%f Pos Y:%d  V(4)=%d  V(25)=%d"
 params = Vel X, Vel Y, Floor(Pos Y), Var(4), Var(25)
 ignorehitpause = 1
 
-;相手挙動確認
+;Opponent behavior check
 [State -2, AppendToClipBoard]
 type = AppendToClipBoard
 trigger1 = 1
@@ -1776,7 +1776,7 @@ text = "\nVel X:%f Vel Y:%f Dis X:%d Dis Y:%d"
 params = Enemy,Vel X, Enemy,Vel Y, Floor(P2BodyDist X), Floor(P2BodyDist Y)
 ignorehitpause = 1
 
-;ステージ端確認
+;Stage edge check
 [State -2, AppendToClipBoard]
 type = AppendToClipBoard
 trigger1 = NumHelper(10000) > 0
@@ -1784,7 +1784,7 @@ text = " F:%d B:%d OBO:%d LOOP:%d"
 params = Helper(10000),Var(0), Helper(10000),Var(1), Helper(10000),Var(10), Var(24)
 ignorehitpause = 1
 
-;相手挙動確認
+;Opponent behavior check
 [State -2, AppendToClipBoard]
 type = Null;AppendToClipBoard
 trigger1 = 1
@@ -1792,7 +1792,7 @@ text = " 33:%d 34:%d 35:%d 36:%d 7:%d"
 params = Var(33), Var(34), Var(35), Var(36), Var(7)
 ignorehitpause = 1
 
-;その他変数確認
+;Other variable check
 [State -2, AppendToClipBoard]
 type = Null;AppendToClipBoard
 trigger1 = NumHelper(25000) > 0
@@ -1803,7 +1803,7 @@ ignorehitpause = 1
 ;===========================================================================
 [Statedef -3]
 ;===========================================================================
-;先行入力認識用ヘルパー
+;Buffered input recognition helper
 [State -3, ChangeState]
 type = ChangeState
 trigger1 = IsHelper(73228)
@@ -1825,7 +1825,7 @@ pausemovetime = 2147483647
 supermovetime = 2147483647
 
 ;---------------------------------------------------------------------------
-;A.I.起動
+;A.I. activation
 [State -3, AI_Start]
 Type = VarSet
 triggerall = Var(59) < 1
@@ -1853,7 +1853,7 @@ v = 59
 value = 1
 
 ;===========================================================================
-;各種設定を本体へ
+;Various settings to main body
 
 [State -3, AI_1]
 Type = Null
@@ -1874,9 +1874,9 @@ trigger1 = Helper(25000),Var(59) > 0
 trigger1 = Var(59) := Helper(25000),Var(59)
 
 ;---------------------------------------------------------------------------
-;Helper学習から本体へ
+;Helper learning to main body
 
-;ラウンド終了時リセット(TurnsMode限定)
+;Round end reset (TurnsMode only)
 [State -3, AI]
 type = Null
 triggerall = Enemy,TeamMode = Turns
@@ -1906,7 +1906,7 @@ trigger11 = Var(41) := 0 || 1
 trigger12 = Var(42) != 0
 trigger12 = Var(42) := 0 || 1
 
-[State -3, 判別リセット]
+[State -3, DetectionReset]
 type = Null
 triggerall = Var(39) != 0
 trigger1 = Var(33) != 0
@@ -1922,7 +1922,7 @@ trigger4 = Var(36) != 0
 trigger4 = Var(39) = Var(36)
 trigger4 = Var(36) := 0 || 1
 
-[State -3, ガード不能判別]
+[State -3, UnguardableDetection]
 type = Null
 triggerall = Var(39) = 0
 trigger1 = Var(33) != 0
@@ -1932,7 +1932,7 @@ trigger2 = Var(34) != 0
 trigger2 = Var(34) = Var(35) || Var(34) = Var(36)
 trigger2 = Var(39) := Var(34)
 
-[State -3, 学習吸い上げ・投げ学習]
+[State -3, LearningAbsorb_Throw]
 type = VarSet
 trigger1 = Var(31) = 0
 trigger1 = NumHelper(25000) > 0
@@ -1941,7 +1941,7 @@ v = 31
 value = Helper(25000),Var(31)
 ignorehitpause = 1
 
-[State -3, 学習吸い上げ・投げ学習]
+[State -3, LearningAbsorb_Throw]
 type = VarSet
 trigger1 = Var(32) = 0
 trigger1 = NumHelper(25000) > 0
@@ -1950,7 +1950,7 @@ v = 32
 value = Helper(25000),Var(32)
 ignorehitpause = 1
 
-[State -3, 学習吸い上げ・中段学習]
+[State -3, LearningAbsorb_Mid]
 type = VarSet
 trigger1 = Var(33) = 0
 trigger1 = NumHelper(25000) > 0
@@ -1959,7 +1959,7 @@ v = 33
 value = Helper(25000),Var(33)
 ignorehitpause = 1
 
-[State -3, 学習吸い上げ・中段学習]
+[State -3, LearningAbsorb_Mid]
 type = VarSet
 trigger1 = Var(34) = 0
 trigger1 = NumHelper(25000) > 0
@@ -1968,7 +1968,7 @@ v = 34
 value = Helper(25000),Var(34)
 ignorehitpause = 1
 
-[State -3, 学習吸い上げ・下段学習]
+[State -3, LearningAbsorb_Low]
 type = VarSet
 trigger1 = Var(35) = 0
 trigger1 = NumHelper(25000) > 0
@@ -1977,7 +1977,7 @@ v = 35
 value = Helper(25000),Var(35)
 ignorehitpause = 1
 
-[State -3, 学習吸い上げ・下段学習]
+[State -3, LearningAbsorb_Low]
 type = VarSet
 trigger1 = Var(36) = 0
 trigger1 = NumHelper(25000) > 0
@@ -1986,7 +1986,7 @@ v = 36
 value = Helper(25000),Var(36)
 ignorehitpause = 1
 
-[State -3, 学習吸い上げ・空ガ不可学習]
+[State -3, LearningAbsorb_AirUnguardable]
 type = VarSet
 trigger1 = Var(37) = 0
 trigger1 = NumHelper(25000) > 0
@@ -1995,7 +1995,7 @@ v = 37
 value = Helper(25000),Var(37)
 ignorehitpause = 1
 
-[State -3, 学習吸い上げ・空ガ不可学習]
+[State -3, LearningAbsorb_AirUnguardable]
 type = VarSet
 trigger1 = Var(38) = 0
 trigger1 = NumHelper(25000) > 0
@@ -2004,7 +2004,7 @@ v = 38
 value = Helper(25000),Var(38)
 ignorehitpause = 1
 
-[State -3, 学習吸い上げ・ガー不学習]
+[State -3, LearningAbsorb_GuardBreak]
 type = VarSet
 trigger1 = Var(39) = 0
 trigger1 = NumHelper(25000) > 0
@@ -2013,7 +2013,7 @@ v = 39
 value = Helper(25000),Var(39)
 ignorehitpause = 1
 
-[State -3, 学習吸い上げ・中段攻撃時間]
+[State -3, LearningAbsorb_MidAttackTime]
 type = VarSet
 triggerall = NumHelper(25000) > 0
 triggerall = Helper(25000),Var(40) > 0
@@ -2024,7 +2024,7 @@ v = 40
 value = Helper(25000),Var(40)
 ignorehitpause = 1
 
-[State -3, 学習吸い上げ・下段攻撃時間]
+[State -3, LearningAbsorb_LowAttackTime]
 type = VarSet
 triggerall = NumHelper(25000) > 0
 triggerall = Helper(25000),Var(41) > 0
@@ -2035,7 +2035,7 @@ v = 41
 value = Helper(25000),Var(41)
 ignorehitpause = 1
 
-[State -3, 学習吸い上げ・空ガ攻撃時間]
+[State -3, LearningAbsorb_AirAttackTime]
 type = VarSet
 triggerall = NumHelper(25000) > 0
 triggerall = Helper(25000),Var(42) > 0
@@ -2047,7 +2047,7 @@ value = Helper(25000),Var(42)
 ignorehitpause = 1
 
 ;===========================================================================
-;攻撃時間記憶
+;Attack time memory
 
 [State -3, AttackTime]
 type = VarSet
@@ -2075,7 +2075,7 @@ value = 1
 ignorehitpause = 1
 
 ;===========================================================================
-;立ち中段ガード判断
+;Stand mid guard judgment
 
 [State -3, Guard_1]
 type = VarSet
@@ -2098,7 +2098,7 @@ value = 1
 ignorehitpause = 1
 
 ;===========================================================================
-;タッグ時相手判別
+;Tag opponent identification
 
 [State -3, Tag_Alive]
 type = VarSet
@@ -2118,7 +2118,7 @@ value = 1
 ignorehitpause = 1
 
 ;===========================================================================
-;相手進行方向判別
+;Opponent direction identification
 
 [State -3, Facing * P2Dist X]
 type = VarSet
@@ -2128,25 +2128,25 @@ value = (Facing * EnemyNear(Var(55)),Facing) * IfElse(P2Dist X > 0, 1, -1) * IfE
 ignorehitpause = 1
 
 ;===========================================================================
-;コンボルート監視
+;Combo route monitor
 
 ;===========================================================================
-;最優先専用行動（特殊行動）
+;Highest priority dedicated action (special action)
 
 ;===========================================================================
-;ガード、反応系、タッグ専用など（優先順位・高）
+;Guard, reaction, tag dedicated etc (high priority)
 
 ;===========================================================================
-;立ち回り技振り
+;Neutral game move selection
 
 ;===========================================================================
-;移動もろもろ
+;Movement various
 
 ;===========================================================================
-;力コンボ
+;Power combo
 
 ;===========================================================================
-;技・極コンボ
+;Technique/Extreme combo
 
 ;===========================================================================
-;その他追撃
+;Other follow-up

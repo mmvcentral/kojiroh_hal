@@ -1,8 +1,8 @@
 ;---------------------------------------------------------------------------
-; ƒwƒ‹ƒp[ŠÖ˜A
+; Helper related
 ;---------------------------------------------------------------------------
 ;---------------------------------------------------------------------------
-; ¾‹óE‚`i”ò‚Ñ“¹‹ïj
+; Shikku-satsu A (projectile)
 [Statedef 1050]
 type     = A
 movetype = A
@@ -38,7 +38,7 @@ trigger1 = 1
 attr = SCA, AA, AP, AT
 stateno = 1070
 
-;—Í
+; Power
 [State 1050, 5]
 type = HitDef
 trigger1 = Root,Var(1) = 0
@@ -76,7 +76,7 @@ p2facing = IfElse(Root,Var(7)=0,1,0)
 yaccel = .45
 id = 1050
 
-;‹Z
+; Technique
 [State 1050, 6]
 type = HitDef
 trigger1 = Root,Var(1) = 1
@@ -114,7 +114,7 @@ p2facing = IfElse(Root,Var(7)=0,1,0)
 yaccel = .45
 id = 1050
 
-;‹É
+; Extreme
 [State 1050, 7]
 type = HitDef
 trigger1 = Root,Var(1) = 2
@@ -239,7 +239,7 @@ type = DestroySelf
 trigger1 = AnimTime = 0
 
 ;---------------------------------------------------------------------------
-; ¾‹óE‚ai”ò‚Ñ“¹‹ï‚Pj
+; Shikku-satsu B (projectile 1)
 [Statedef 1060]
 type     = A
 movetype = A
@@ -286,7 +286,7 @@ type = VelSet
 trigger1 = Time = 20
 x = 8.0
 
-;—Í
+; Power
 [State 1060, 7]
 type = HitDef
 trigger1 = Root,Var(1) = 0
@@ -324,7 +324,7 @@ p2facing = IfElse(Root,Var(7)=0,1,0)
 yaccel = .45
 id = 1060
 
-;‹Z
+; Technique
 [State 1060, 8]
 type = HitDef
 trigger1 = Root,Var(1) = 1
@@ -362,7 +362,7 @@ p2facing = IfElse(Root,Var(7)=0,1,0)
 yaccel = .45
 id = 1060
 
-;‹É
+; Extreme
 [State 1060, 9]
 type = HitDef
 trigger1 = Root,Var(1) = 2
@@ -476,7 +476,7 @@ type = DestroySelf
 trigger1 = FrontEdgeDist < -125
 
 ;---------------------------------------------------------------------------
-; ¾‹óE‚ai”ò‚Ñ“¹‹ï‚Qj
+; Shikku-satsu B (projectile 2)
 [Statedef 1061]
 type     = A
 movetype = A
@@ -518,7 +518,7 @@ trigger1 = 1
 attr = SCA, AA, AP, AT
 stateno = 1070
 
-;—Í
+; Power
 [State 1061, 6]
 type = HitDef
 trigger1 = Root,Var(1) = 0
@@ -556,7 +556,7 @@ p2facing = IfElse(Root,Var(7)=0,1,0)
 yaccel = .45
 id = 1061
 
-;‹Z
+; Technique
 [State 1061, 7]
 type = HitDef
 trigger1 = Root,Var(1) = 1
@@ -594,7 +594,7 @@ p2facing = IfElse(Root,Var(7)=0,1,0)
 yaccel = .45
 id = 1061
 
-;‹É
+; Extreme
 [State 1061, 8]
 type = HitDef
 trigger1 = Root,Var(1) = 2
@@ -708,7 +708,7 @@ type = DestroySelf
 trigger1 = FrontEdgeDist < -125
 
 ;---------------------------------------------------------------------------
-; ¾‹óEi”ò‚Ñ“¹‹ïƒqƒbƒgÁ–Åj
+; Shikku-satsu (projectile hit vanish)
 [Statedef 1070]
 type     = A
 movetype = I
@@ -742,7 +742,7 @@ trigger1 = AnimElemTime(10) >= 0
 trigger1 = Root,MoveType = H || Root,StateType = L || Enemy,MoveType != H
 
 ;---------------------------------------------------------------------------
-; —•‘‰œ‹`c‘œ•\¦
+; Ranbu Ougi afterimage display
 [Statedef 3505]
 type     = S
 movetype = I
@@ -808,7 +808,7 @@ trigger1 = NumHelper(3506) = 0
 trigger1 = NumHelper(3507) = 0
 
 ;---------------------------------------------------------------------------
-; —•‘‰œ‹`c‘œ•\¦‚P
+; Ranbu Ougi afterimage displayï¼‘
 [Statedef 3506]
 type     = S
 movetype = I
@@ -864,7 +864,7 @@ trigger1 = Root,MoveType = H
 trigger2 = Root,StateNo != 3502
 
 ;---------------------------------------------------------------------------
-; —•‘‰œ‹`c‘œ•\¦‚Q
+; Ranbu Ougi afterimage displayï¼’
 [Statedef 3507]
 type     = S
 movetype = I
@@ -913,7 +913,7 @@ trigger1 = Root,MoveType = H
 trigger2 = Root,StateNo != 3502
 
 ;---------------------------------------------------------------------------
-; 6CƒXƒNƒ[ƒ‹ÄŒ»
+; 6C scroll reproduction
 ;---------------------------------------------------------------------------
 [Statedef 6241]
 type     = A
@@ -958,7 +958,7 @@ trigger1 = P2StateNo != 241
 trigger2 = Time > 0 && Vel X = 0
 
 ;---------------------------------------------------------------------------
-; ƒQ[ƒW•\¦
+; Gauge display
 ;---------------------------------------------------------------------------
 [Statedef 10000]
 type     = A
@@ -981,7 +981,7 @@ trigger1 = NumExplod(10010) = 0
 trigger1 = Floor((256*Root,Life)/Root,LifeMax) < 65
 id = 10030
 
-;Œ•¿ƒQ[ƒW˜g•\¦E‚P‚o‘¤
+; Sword style gauge frame display - P1 side
 [State 10000, Explod_1]
 type = Explod
 trigger1 = Root,TeamSide = 1
@@ -1001,7 +1001,7 @@ sprpriority = 19
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;Œ•¿ƒQ[ƒW˜g•\¦E‚Q‚o‘¤
+; Sword style gauge frame display - P2 side
 [State 10000, Explod_1]
 type = Explod
 trigger1 = Root,TeamSide = 2
@@ -1021,7 +1021,7 @@ sprpriority = 19
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;Œ•¿ƒQ[ƒW‚P^‚SE‚P‚o‘¤
+; Sword style gauge 1/4 - P1 side
 [State 10000, Explod_1]
 type = Explod
 trigger1 = Root,TeamSide = 1
@@ -1041,7 +1041,7 @@ sprpriority = 20
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;Œ•¿ƒQ[ƒW‚P^‚SE‚Q‚o‘¤
+; Sword style gauge 1/4 - P2 side
 [State 10000, Explod_1]
 type = Explod
 trigger1 = Root,TeamSide = 2
@@ -1061,7 +1061,7 @@ sprpriority = 20
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;Œ•¿ƒQ[ƒW‚l‚`‚wE‚P‚o‘¤
+; Sword style gauge MAX - P1 side
 [State 10000, Explod_2]
 type = Explod
 trigger1 = Root,TeamSide = 1
@@ -1080,7 +1080,7 @@ sprpriority = 21
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;Œ•¿ƒQ[ƒW‚l‚`‚wE‚Q‚o‘¤
+; Sword style gauge MAX - P2 side
 [State 10000, Explod_2]
 type = Explod
 trigger1 = Root,TeamSide = 2
@@ -1100,7 +1100,7 @@ sprpriority = 21
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;Œ•¿ƒQ[ƒW‘‰ÁE‚P‚o‘¤
+; Sword style gauge increase - P1 side
 [State 10000, Explod_3]
 type = Explod
 trigger1 = Root,TeamSide = 1
@@ -1117,7 +1117,7 @@ sprpriority = 18
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;Œ•¿ƒQ[ƒW‘‰ÁE‚Q‚o‘¤
+; Sword style gauge increase - P2 side
 [State 10000, Explod_3]
 type = Explod
 trigger1 = Root,TeamSide = 2
@@ -1135,7 +1135,7 @@ sprpriority = 18
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;Œ•¿ƒQ[ƒWŒ¸­
+; Sword style gauge decrease
 [State 10000, VarAdd]
 type = VarAdd
 trigger1 = Ceil(Root,Power/15.625) < Var(5)
@@ -1143,7 +1143,7 @@ v = 5
 value = -1
 ignorehitpause = 1
 
-;Œ•¿ƒQ[ƒW‘‰Á
+; Sword style gauge increase
 [State 10000, VarAdd]
 type = VarAdd
 trigger1 = Ceil(Root,Power/15.625) > Var(5)
@@ -1157,7 +1157,7 @@ trigger1 = Var(5) < 64
 id = 10030
 scale = Var(5)/64.0, 1.0
 
-;’ÊíŒ•¿ƒQ[ƒWÁ‹‚P
+; Normal sword style gauge clear 1
 [State 10000, 4]
 type = RemoveExplod
 trigger1 = NumExplod(10020) > 0
@@ -1167,7 +1167,7 @@ trigger3 = RoundState > 2
 trigger3 = NumHelper(10181) > 0 || Root,StateNo = 188
 id = 10001
 
-;’ÊíŒ•¿ƒQ[ƒWÁ‹‚Q
+; Normal sword style gauge clear 2
 [State 10000, 5]
 type = RemoveExplod
 trigger1 = NumExplod(10020) > 0
@@ -1177,7 +1177,7 @@ trigger3 = RoundState > 2
 trigger3 = NumHelper(10181) > 0 || Root,StateNo = 188
 id = 10010
 
-;’ÊíŒ•¿ƒQ[ƒWÁ‹‚R
+; Normal sword style gauge clear 3
 [State 10000, 6]
 type = RemoveExplod
 trigger1 = NumExplod(10020) > 0
@@ -1186,7 +1186,7 @@ trigger2 = RoundState > 2
 trigger2 = NumHelper(10181) > 0 || Root,StateNo = 188
 id = 10030
 
-;‚l‚`‚wŒ•¿ƒQ[ƒWÁ‹
+; MAX sword style gauge clear
 [State 10000, 7]
 type = RemoveExplod
 trigger1 = Var(5) < 64
@@ -1195,7 +1195,7 @@ trigger2 = NumHelper(10181) > 0 || Root,StateNo = 188
 id = 10020
 
 ;=====================================
-;‘Ì—ÍƒQ[ƒW˜g•\¦E‚P‚o‘¤
+; Life gauge frame display - P1 side
 [State 10000, Explod_4]
 type = Explod
 trigger1 = Root,TeamSide = 1
@@ -1214,7 +1214,7 @@ sprpriority = 19
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;‘Ì—ÍƒQ[ƒW˜g•\¦E‚Q‚o‘¤
+; Life gauge frame display - P2 side
 [State 10000, Explod_5]
 type = Explod
 trigger1 = Root,TeamSide = 2
@@ -1233,7 +1233,7 @@ sprpriority = 19
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;‘Ì—ÍƒQ[ƒWÁ‹‚P
+; Life gauge clear 1
 [State 10000, 8]
 type = RemoveExplod
 triggerall = NumExplod(16001) > 0
@@ -1244,7 +1244,7 @@ trigger2 = Floor((256*Root,Life)/Root,LifeMax) < Floor(FVar(1))
 id = 16001
 ignorehitpause = 1
 
-;‘Ì—ÍƒQ[ƒWÁ‹‚Q
+; Life gauge clear 2
 [State 10000, 9]
 type = RemoveExplod
 triggerall = NumExplod(16002) > 0
@@ -1256,7 +1256,7 @@ trigger3 = Floor((256*Root,Life)/Root,LifeMax) != Floor(FVar(1)) + 1
 id = 16002
 ignorehitpause = 1
 
-;‘Ì—ÍƒQ[ƒWÁ‹‚R
+; Life gauge clear 3
 [State 10000, 10]
 type = RemoveExplod
 triggerall = NumExplod(16003) > 0
@@ -1267,7 +1267,7 @@ trigger2 = Floor((256*Root,Life)/Root,LifeMax) != Floor(FVar(1))
 id = 16003
 ignorehitpause = 1
 
-;‘Ì—ÍƒQ[ƒW‘Œ¸E‚P‚o‘¤
+; Life gauge increase/decrease - P1 side
 [State 10000, Explod_6]
 type = Explod
 trigger1 = Root,TeamSide = 1
@@ -1323,7 +1323,7 @@ sprpriority = 18
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;‘Ì—ÍƒQ[ƒW‘Œ¸E‚Q‚o‘¤
+; Life gauge increase/decrease - P2 side
 [State 10000, Explod_9]
 type = Explod
 trigger1 = Root,TeamSide = 2
@@ -1382,7 +1382,7 @@ sprpriority = 18
 pausemovetime = 999999999
 supermovetime = 999999999
 
-;‘Ì—ÍƒQ[ƒW‰Šúİ’è
+; Life gauge initial setup
 [State 10000, VarSet]
 type = VarSet
 trigger1 = 1
@@ -1391,7 +1391,7 @@ value = Floor((256*Root,Life)/Root,LifeMax)
 persistent = 0
 ignorehitpause = 1
 
-;‘Ì—Í·•ª‘ª’è
+; Life difference measurement
 [State 10000, VarAdd]
 type = VarSet
 trigger1 = Time%2 = 0
@@ -1408,7 +1408,7 @@ fv = 2
 value = Floor(Floor((256*Root,Life)/Root,LifeMax) - FVar(1))
 ignorehitpause = 1
 
-;‘Ì—ÍƒQ[ƒWŒ¸­
+; Life gauge decrease
 [State 10000, VarAdd]
 type = VarAdd
 trigger1 = Time%2 = 0
@@ -1417,7 +1417,7 @@ fv = 1
 value = -Ceil(FVar(2) / 8)
 ignorehitpause = 1
 
-;‘Ì—ÍƒQ[ƒW‘‰Á
+; Life gauge increase
 [State 10000, VarAdd]
 type = VarAdd
 trigger1 = Time%2 = 0
@@ -1426,7 +1426,7 @@ fv = 1
 value = Ceil(FVar(2) / 8)
 ignorehitpause = 1
 
-;‘Ì—ÍƒQ[ƒWÁ‹‚S
+; Life gauge clear 4
 [State 10000, 11]
 type = RemoveExplod
 triggerall = NumExplod(16000) > 0
@@ -1435,7 +1435,7 @@ trigger1 = NumHelper(10181) > 0 || Root,StateNo = 188
 id = 16000
 ignorehitpause = 1
 
-;‘Ì—ÍƒQ[ƒWÁ‹‚T
+; Life gauge clear 5
 [State 10000, 12]
 type = RemoveExplod
 triggerall = NumExplod(16001) > 0
@@ -1444,7 +1444,7 @@ trigger1 = NumHelper(10181) > 0 || Root,StateNo = 188
 id = 16001
 ignorehitpause = 1
 
-;‘Ì—ÍƒQ[ƒWÁ‹‚U
+; Life gauge clear 6
 [State 10000, 13]
 type = RemoveExplod
 triggerall = NumExplod(16002) > 0
@@ -1453,7 +1453,7 @@ trigger1 = NumHelper(10181) > 0 || Root,StateNo = 188
 id = 16002
 ignorehitpause = 1
 
-;‘Ì—ÍƒQ[ƒWÁ‹‚V
+; Life gauge clear 7
 [State 10000, 14]
 type = RemoveExplod
 triggerall = NumExplod(16003) > 0
@@ -1470,7 +1470,7 @@ params = floor(fvar(1)), floor(fvar(2)), ((256*Root,Life)/Root,LifeMax), Floor(F
 ignorehitpause = 1
 
 ;=====================================
-;—­‚ßŠÔŒv‘ªiƒK[•sE˜T‰åE—ëj
+; Charge time measurement (guard break, Rouga-Rei)
 [State 10000, Charge_1]
 type = VarSet
 triggerall = Root,Time = 0
@@ -1561,7 +1561,7 @@ trigger1 = 1
 var(1) = IfElse((RootDist X < P2Dist X), Ceil(Var(3)+(RootDist X))*(IfElse(Root,Facing = 0, 1, -1)), Ceil(Var(2)+(RootDist X))*(IfElse(Root,Facing = 0, -1, 1)))
 
 ;---------------------------------------------------------------------------
-; ƒƒCƒvƒCƒ“‰‰oƒwƒ‹ƒp[
+; Wipe-in effect helper
 ;---------------------------------------------------------------------------
 [Statedef 10180]
 type     = A
@@ -1638,7 +1638,7 @@ trigger1 = NumExplod(10180) = 0
 trigger1 = NumExplod(10181) = 0
 
 ;---------------------------------------------------------------------------
-; ƒƒCƒvƒAƒEƒg‰‰oƒwƒ‹ƒp[
+; Wipe-out effect helper
 ;---------------------------------------------------------------------------
 [Statedef 10181]
 type     = A
@@ -1727,7 +1727,7 @@ trigger1 = Time > 0
 trigger2 = Root,StateNo = 188 && Root,Time <= 460
 
 ;---------------------------------------------------------------------------
-; ƒfƒ‚—pƒƒCƒvƒCƒ“‰‰oƒwƒ‹ƒp[
+; Demo wipe-in effect helper
 ;---------------------------------------------------------------------------
 [Statedef 10188]
 type     = A
@@ -1805,9 +1805,9 @@ trigger1 = NumExplod(10188) = 0
 trigger1 = NumExplod(10189) = 0
 
 ;---------------------------------------------------------------------------
-; Œ•¿‘I‘ğƒwƒ‹ƒp[
+; Sword style selection helper
 ;---------------------------------------------------------------------------
-; Œ•¿‘I‘ği—Íj
+; Sword style selection (Power)
 [Statedef 10190]
 type     = A
 movetype = I
@@ -1834,7 +1834,7 @@ trigger6 = Root,Var(1) = 0
 trigger6 = Root,Var(57) = 1
 value = 10195
 
-;—Í¨‹Z‚Ö
+; Power -> Technique
 [State 10190, 3]
 type = ParentVarSet
 trigger1 = Command = "fwd"
@@ -1847,7 +1847,7 @@ type = ChangeState
 trigger1 = Root,Var(1) = 1
 value = 10191
 
-;‹ÉŒ•¿‰B‚µƒRƒ}ƒ“ƒh
+; Extreme sword style hidden command
 [State 10190, 5]
 type = VarSet
 trigger1 = Command = "down"
@@ -1877,14 +1877,14 @@ trigger1 = Var(1) = 0
 trigger2 = Var(2) > 240
 var(2) = 0
 
-;‘¦Œˆ’è—p’Zkƒ‹[ƒg
+; Shortcut route for instant decision
 [State 10190, 10]
 type = ChangeState
 trigger1 = Root,Var(57) = 3
 value = 10194
 
 ;---------------------------------------------------------------------------
-; Œ•¿‘I‘ği—Í¨‹Zj
+; Sword style selection (Power -> Technique)
 [Statedef 10191]
 type     = A
 movetype = I
@@ -1911,7 +1911,7 @@ trigger1 = AnimTime = 0
 value = 10192
 
 ;---------------------------------------------------------------------------
-; Œ•¿‘I‘ği‹Zj
+; Sword style selection (Technique)
 [Statedef 10192]
 type     = A
 movetype = I
@@ -1938,7 +1938,7 @@ trigger6 = Root,Var(1) = 1
 trigger6 = Root,Var(57) = 2
 value = 10195
 
-;‹Z¨—Í‚Ö
+; Technique -> Power
 [State 10192, 3]
 type = ParentVarSet
 trigger1 = Command = "fwd"
@@ -1951,7 +1951,7 @@ type = ChangeState
 trigger1 = Root,Var(1) = 0
 value = 10193
 
-;‹ÉŒ•¿‰B‚µƒRƒ}ƒ“ƒh
+; Extreme sword style hidden command
 [State 10192, 5]
 type = VarSet
 trigger1 = Command = "up"
@@ -1988,7 +1988,7 @@ trigger2 = Root,Var(57) = 3
 value = 10194
 
 ;---------------------------------------------------------------------------
-; Œ•¿‘I‘ği‹Z¨—Íj
+; Sword style selection (Technique -> Power)
 [Statedef 10193]
 type     = A
 movetype = I
@@ -2015,7 +2015,7 @@ trigger1 = AnimTime = 0
 value = 10190
 
 ;---------------------------------------------------------------------------
-; Œ•¿‘I‘ği‹Éj
+; Sword style selection (Extreme)
 [Statedef 10194]
 type     = A
 movetype = I
@@ -2053,7 +2053,7 @@ trigger1 = Var(1) >= 13
 trigger2 = Root,Var(57) = 3
 var(1) = 2
 
-;‹É¨—Í‚Ö
+; Extreme -> Power
 [State 10192, 3]
 type = ParentVarSet
 trigger1 = Var(1) < 13
@@ -2061,7 +2061,7 @@ trigger1 = Command = "fwd"
 trigger2 = Root,Var(57) = 1
 var(1) = 0
 
-;‹É¨‹Z‚Ö
+; Extreme -> Technique
 [State 10192, 3]
 type = ParentVarSet
 trigger1 = Var(1) < 13
@@ -2080,7 +2080,7 @@ trigger1 = Root,Var(1) = 1
 value = 10191
 
 ;---------------------------------------------------------------------------
-; Œ•¿Œˆ’è
+; Sword style decision
 [Statedef 10195]
 type     = A
 movetype = I
@@ -2110,7 +2110,7 @@ type = DestroySelf
 trigger1 = AnimTime = 0
 
 ;---------------------------------------------------------------------------
-; ¸‰ØƒGƒtƒFƒNƒg
+; Super cancel effect
 [Statedef 12000]
 anim = 10000
 ctrl = 0
@@ -2174,9 +2174,9 @@ type = DestroySelf
 trigger1 = Time = 35
 
 ;---------------------------------------------------------------------------
-; K.O.Ÿ—˜”wŒi“_–Åƒwƒ‹ƒp[
+; K.O. victory background flash helper
 ;---------------------------------------------------------------------------
-;Ô“_–Å
+; Red flash
 [Statedef 15120]
 type     = A
 movetype = I
@@ -2232,7 +2232,7 @@ value = 176,0,0
 under = 1
 
 ;---------------------------------------------------------------------------
-;”’“_–Å
+; White flash
 [Statedef 15121]
 type     = A
 movetype = I
@@ -2260,7 +2260,7 @@ add = 256-(Time*8),256-(Time*8),256-(Time*8)
 time = 2
 
 ;---------------------------------------------------------------------------
-; Ÿ—˜”wŒiˆÚ“®—pƒwƒ‹ƒp[
+; Victory background movement helper
 ;---------------------------------------------------------------------------
 [Statedef 18000]
 type   = S
@@ -2303,7 +2303,7 @@ value = 1
 movecamera = 1,1
 
 ;---------------------------------------------------------------------------
-; A.I.‹N“®ƒwƒ‹ƒp[
+; A.I. activation helper
 ;---------------------------------------------------------------------------
 [Statedef 20000]
 ctrl = 0
@@ -2372,7 +2372,7 @@ trigger11 = Root,Command = "down"
 var(59) = 1
 
 ;---------------------------------------------------------------------------
-; æs“ü—Íƒwƒ‹ƒp[
+; Input buffer helper
 ;---------------------------------------------------------------------------
 [Statedef 73228]
 type     = A
@@ -2407,14 +2407,14 @@ trigger1 = 1
 x = Root,Pos X
 y = 9999
 
-;æs“ü—Íó•tŠÔ	;ƒfƒtƒHƒ‹ƒg12H
+; Input buffer acceptance time (default 12?)
 [State 73228, VarSet]
 type = VarSet
 trigger1 = 1
 v = 0
-value = 20;10‚Å‚Ío‚È‚¢A15‚Å‚Ío‚·‚¬
+value = 20;10ã§ã¯å‡ºãªã„ã€15ã§ã¯å‡ºã™ã
 
-;ƒRƒ}ƒ“ƒh“ü—Í
+; Command input
 [State 73228, Pre_Time]
 Type = Null
 triggerall = Var(59) = 0
@@ -2480,7 +2480,7 @@ trigger1 = Command = "c"
 v = 29
 value = Var(0)
 
-;•Ï”ƒŠƒZƒbƒg
+; Variable reset
 [State 73228, Time_Reset]
 Type = Null
 triggerall = Root,Time <= 2
@@ -2533,7 +2533,7 @@ trigger16 = Var(25) > 0
 trigger16 = Root,StateNo = 1110
 trigger16 = Var(25) := 0 || 1
 
-;æs“ü—ÍŠÔŒ¸­
+; Input buffer time decrease
 [State 73228, 2146+B]
 type = VarAdd
 trigger1 = Var(10) > 0
@@ -2634,7 +2634,7 @@ type = VarAdd
 trigger1 = Var(29) > 0
 var(29) = -1
 
-;•Ï”Šm”F
+; Variable check
 [State -2, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
@@ -2650,7 +2650,7 @@ params = Var(11), Var(14), Var(17), Var(20), Var(21)
 ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
-; Œ•‘MƒGƒtƒFƒNƒg•\¦
+; Sword flash effect display
 ;---------------------------------------------------------------------------
 [Statedef 50000]
 type     = A
@@ -2773,7 +2773,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;ƒ_ƒbƒVƒ…ã’i
+; Dash high
 [State 50000, 7]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -2794,7 +2794,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;B+CiƒK[•sE’Êíj
+; B+C (guard break, normal)
 [State 50000, 8]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -2815,7 +2815,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;B+CiƒK[•sEÅ‘åj
+; B+C (guard break, max)
 [State 50000, 9]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -2836,7 +2836,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;B+Ci’†’ij
+; B+C (mid)
 [State 50000, 10]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -2968,7 +2968,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;’e‚«’Ç‰ÁUŒ‚
+; Deflect additional attack
 [State 50000, 16]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -2989,7 +2989,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;–³–¾Œ•iˆê’i–Új
+; Mumeiken (1st hit)
 [State 50000, 17]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3010,7 +3010,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;–³–¾Œ•i“ñ’i–Új
+; Mumeiken (2nd hit)
 [State 50000, 18]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3031,7 +3031,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;–³–¾Œ•iO’i–Új
+; Mumeiken (3rd hit)
 [State 50000, 19]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3052,7 +3052,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;U‰Ø
+; Sange
 [State 50000, 20]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3073,7 +3073,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;–³–¾Œ•EæÑiˆê’i–Új
+; Mumeiken-Nie (1st hit)
 [State 50000, 21]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3094,7 +3094,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;–³–¾Œ•EæÑi“ñ’i–Új
+; Mumeiken-Nie (2nd hit)
 [State 50000, 22]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3115,7 +3115,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;–³–¾Œ•EæÑiO’i–ÚE”ñˆÃ“]j
+; Mumeiken-Nie (3rd hit, no fade)
 [State 50000, 23]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3136,7 +3136,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;–³–¾Œ•EæÑiO’i–ÚEˆÃ“]j
+; Mumeiken-Nie (3rd hit, fade)
 [State 50000, 24]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3157,7 +3157,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;•Sã˜Aaiã’iŠJnE‘Å‚¿ã‚°ƒtƒBƒjƒbƒVƒ…E“Áêƒ‹[ƒg‚U‚a‚bj
+; Mozu Renzan (high start, launch finish, special route 6BC)
 [State 50000, 25]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3180,7 +3180,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;•Sã˜Aai’ÊíƒtƒBƒjƒbƒVƒ…‚Pj
+; Mozu Renzan (normal finish 1)
 [State 50000, 26]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3201,7 +3201,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;•Sã˜Aai’ÊíƒtƒBƒjƒbƒVƒ…‚Qj
+; Mozu Renzan (normal finish 2)
 [State 50000, 27]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3222,7 +3222,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;•Sã˜Aai’ÊíƒtƒBƒjƒbƒVƒ…‚Rj
+; Mozu Renzan (normal finish 3)
 [State 50000, 28]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3243,7 +3243,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;•Sã˜Aai‰º’iƒ‹[ƒg‚Pj
+; Mozu Renzan (low route 1)
 [State 50000, 29]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3264,7 +3264,7 @@ ignorehitpause = 1
 supermovetime = 999999999
 pausemovetime = 999999999
 
-;•Sã˜Aai“ÁêƒtƒBƒjƒbƒVƒ…j
+; Mozu Renzan (special finish)
 [State 50000, 30]
 type = Explod
 triggerall = GameTime%2 = 0
@@ -3286,7 +3286,7 @@ supermovetime = 999999999
 pausemovetime = 999999999
 
 ;---------------------------------------------------------------------------
-; ˜T‰åE—ëƒGƒtƒFƒNƒgƒwƒ‹ƒp[
+; Rouga-Rei effect helper
 ;---------------------------------------------------------------------------
 [Statedef 53000]
 type     = A
@@ -3335,7 +3335,7 @@ type = DestroySelf
 trigger1 = AnimTime = 0
 
 ;---------------------------------------------------------------------------
-; ƒXƒe[ƒW’[‘ª’èƒwƒ‹ƒp[i‘O•ûj
+; Stage edge measurement helper (forward)
 ;---------------------------------------------------------------------------
 [Statedef 100000]
 type     = A
@@ -3405,7 +3405,7 @@ trigger1 = NumHelper(10000) > 0
 trigger1 = Helper(10000),Var(0)
 
 ;---------------------------------------------------------------------------
-; ƒXƒe[ƒW’[‘ª’èƒwƒ‹ƒp[iŒã•ûj
+; Stage edge measurement helper (backward)
 ;---------------------------------------------------------------------------
 [Statedef 110000]
 type     = A

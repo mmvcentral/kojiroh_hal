@@ -1,0 +1,68 @@
+▼ Button Layout
+══════════════════════════════════════════════════════════════════════════════
+※ Already shows Remap assignments. Please be careful when making changes.
+
+a ... Light attack button
+b ... Heavy attack button
+c ... Deflect button
+x ... Shortcut button (Heavy attack + Kick simultaneous press)
+y ... Shortcut button (Throw)
+z ... Kick button
+
+▼ Move List
+══════════════════════════════════════════════════════════════════════════════
+※ All commands are for facing right.
+
+− Normal Moves・Ground −
+Kesa-giri (Diagonal Slash)		a
+Shunsoku・Ren no Maai		a + a (Technique & Extreme only)
+Shunsoku・Rei no Maai		←+a
+Suhei-giri (Horizontal Slash)		↓+a
+Shunsoku・Ichi no Maai		b
+Shunsoku・To no Maai		→+b
+Kiri-sage (Downward Slash)		↓+b
+Gedan-geri (Low Kick)		z
+Kegashi-geri (Crouching Kick)		↓+z
+Jodan-geri (High Kick)		→+z
+Kegashi-suberi-geri (Crouching Slide Kick)		\+z
+Shunsoku-kake		(During dash) →+a or →+b
+Kake-gedan-geri		(During dash) \+a or \+b
+
+− Normal Moves・Air −
+Suhei-giri・Ku (Horizontal Slash・Air)		a
+Shunsoku・Ku no Maai		b
+Tobi-yoko-ashi-geri (Jump Side Kick)		z
+
+− Throw・Special Moves −
+Deflect			c
+Shunsoku・To no Maai		(After deflect) c
+Shunsoku-kake		c+z or y
+Muni			b+z or x (Power only, unblockable, chargeable)
+Muten			b+z or x (Technique & Extreme only, mid attack)
+Rishin-zuki		\+b (Only when opponent is down・attack possible)
+Shunsoku・Ku no Maai		(During Rensatsuzan a→b) z
+
+− Special Moves (Ougi) −
+Shikku-satsu (Swift Sky Kill)		↓\+→+a or b
+Koku-satsu (Void Kill)		→↓\+a or b
+Shobi-sen (Soaring Tail Flash)		↓/←+a (Changes to down attack when hit near enemy)
+Mumeiken (Darkness Sword)		↓/←+b (3-hit attack, only 1st hit can be cancelled to super)
+			[※ Cancellation = Super cancel to super special]
+Shunshin (Instant Dust)		↓/←+z (Movement move, cancelable with specials and above during movement)
+Tenchi (Heaven and Earth)		(During Shunshin) z
+Muni・Retsu		(During Muni) b+z or x hold (Power only)
+Sange (Scattered Blossoms)		→+b+z or →+x (Technique & Extreme only)
+
+− Super Special (Cho-Ougi) −
+Mumeiken・Nie (Darkness Sword・Sacrifice)		↓←→+ab (1 gauge, or when health 1/4 or below)
+
+− Hidden Special (Senzai Ougi) −
+Rouga・Rei (Wolf Fang・Zero)		↓←→+b (Power & Extreme only, when health 1/4 or below + 1 gauge)
+
+− Combo Special (Ranbu Ougi) −
+Mozu Renzan (Hundred Tongues Chain Slash)		↓↓+a or b (Technique & Extreme only, timing-based additional input combo)
+			※ Input after start command
+				Normal route	a・b・z・a・b・z・a・b・↓\+→+z
+				Low route	a・b・z・a・b・z・z・b・a・↓\+→+z
+				Launch route	a・b・z・↓+z・a・↓+z・→+bz
+				Special route	a・b・z・↓+z・a・→b+z・a・b・↓\+→+b
