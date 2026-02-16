@@ -167,3 +167,13 @@ When facing certain opponents, Kojiroh can receive:
 | `Kojiroh_-2-3.cns` | Opponent mechanics compatibility (damage/effects from enemy systems) |
 | `Kojiroh_02_S.cns` | No character-specific reactions |
 | `Kojiroh_04_P.cns` | No character-specific reactions |
+
+---
+
+## Related Documentation
+
+| Document | Description |
+|----------|-------------|
+| [README.md](README.md) | Character overview |
+| [docs/TRANSLATION.md](docs/TRANSLATION.md) | Japanese-to-English translation reference |
+| [docs/log.md](docs/log.md) | Update history |
